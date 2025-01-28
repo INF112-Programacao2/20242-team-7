@@ -1,5 +1,6 @@
 #include "../include/Carta.h"
 #include "../include/Piloto.h"
+<<<<<<< Updated upstream
 #include "../include/Unidade.h"
 #include "../include/Tatica.h"
 #include "../include/Instantaneo.h"
@@ -189,4 +190,151 @@ int main() {
     partida.exibe_historico();
 
     return 0;
+=======
+#include "../include/Baralho.h"
+#include <iostream>
+#include <vector>
+
+int main() {
+    try {
+        std::cout << "Iniciando o jogo...\n";
+        
+        // Criar baralhos iniciais
+        Baralho baralho1;
+        Baralho baralho2;
+        std::cout << "Baralhos criados\n";
+
+        // Criar cópias das cartas predefinidas
+        Unidade* gundam = new Unidade(UnidadesPredefinidas::RX782Gundam);
+        Unidade* guncannon = new Unidade(UnidadesPredefinidas::Guncannon);
+        Unidade* gm = new Unidade(UnidadesPredefinidas::GM);
+        
+        Unidade* bigzam = new Unidade(UnidadesPredefinidas::BigZam);
+        Unidade* gouf = new Unidade(UnidadesPredefinidas::Gouf);
+        Unidade* zaku = new Unidade(UnidadesPredefinidas::Zaku);
+
+        // Adicionar cartas aos baralhos
+        baralho1.adiciona_carta(gundam);
+        baralho1.adiciona_carta(guncannon);
+        baralho1.adiciona_carta(gm);
+        
+        baralho2.adiciona_carta(bigzam);
+        baralho2.adiciona_carta(gouf);
+        baralho2.adiciona_carta(zaku);
+        
+        std::cout << "Cartas adicionadas aos baralhos\n";
+
+        // Receber nomes dos jogadores
+        std::string nome1, nome2;
+        std::cout << "Nome do Jogador 1: ";
+        std::getline(std::cin, nome1);
+        std::cout << "Nome do Jogador 2: ";
+        std::getline(std::cin, nome2);
+        
+        std::cout << "Criando jogadores...\n";
+
+        // Criar jogadores (vida 100, calor inicial 20)
+        Jogador jogador1(100, nome1, 20, baralho1, true);
+        Jogador jogador2(100, nome2, 20, baralho2, false);
+        
+        std::cout << "Jogadores criados com sucesso\n";
+
+        // Criar partida
+        std::cout << "Iniciando partida...\n";
+        Partida partida(nome1, nome2, false, 0, 0, "", 0);
+        
+        std::cout << "Partida criada com sucesso\n";
+
+        // Dar cartas iniciais
+        std::cout << "Distribuindo cartas iniciais...\n";
+        for(int i = 0; i < 3 && i < baralho1.quantidade_cartas(); i++) {
+            std::cout << "Tentando comprar carta " << i + 1 << " para jogador 1\n";
+            jogador1.compra_carta(i);
+        }
+        for(int i = 0; i < 3 && i < baralho2.quantidade_cartas(); i++) {
+            std::cout << "Tentando comprar carta " << i + 1 << " para jogador 2\n";
+            jogador2.compra_carta(i);
+        }
+
+        std::cout << "\nIniciando loop principal do jogo...\n";
+
+        // Loop principal do jogo
+        while(!partida.encerra_partida()) {
+            Jogador& jogador_atual = partida.getTurno() == 0 ? jogador1 : jogador2;
+            Jogador& jogador_inimigo = partida.getTurno() == 0 ? jogador2 : jogador1;
+
+            std::cout << "\n=== Turno de " << jogador_atual.getNome() << " ===\n";
+            std::cout << "Vida: " << jogador_atual.getVida() << " | Calor: " << jogador_atual.getcalor() << "\n";
+            std::cout << "Inimigo - Vida: " << jogador_inimigo.getVida() << "\n\n";
+
+            std::cout << "Sua mão:\n";
+            jogador_atual.verMao();
+
+            std::cout << "\nSeu campo:\n";
+            for(const auto& carta : jogador_atual.getCampo()) {
+                if(auto unidade = dynamic_cast<Unidade*>(carta)) {
+                    std::cout << unidade->getNome() << " (ATK:" << unidade->getAtk() 
+                             << " HP:" << unidade->getHp() << ")\n";
+                }
+            }
+
+            std::cout << "\nAções disponíveis:\n";
+            std::cout << "1. Jogar carta\n";
+            std::cout << "2. Atacar\n";
+            std::cout << "3. Passar turno\n";
+            std::cout << "4. Encerrar jogo\n";
+            std::cout << "Escolha uma ação: ";
+            
+            int escolha;
+            std::cin >> escolha;
+            std::cin.ignore(); // Limpar o buffer
+
+            switch(escolha) {
+                case 1: {
+                    if(jogador_atual.mao.empty()) {
+                        std::cout << "Sem cartas na mão!\n";
+                        break;
+                    }
+                    
+                    std::cout << "Escolha a carta para jogar (0-" << jogador_atual.mao.size()-1 << "): ";
+                    int index;
+                    std::cin >> index;
+                    std::cin.ignore();
+                    
+                    if(index >= 0 && index < jogador_atual.mao.size()) {
+                        jogador_atual.joga_carta(index);
+                        std::cout << "Carta jogada com sucesso!\n";
+                    }
+                    break;
+                }
+                // ... resto do código do switch permanece o mesmo ...
+                
+                case 4:
+                    std::cout << "Encerrando partida...\n";
+                    partida.encerra_partida(true);
+                    break;
+                default:
+                    std::cout << "Opção inválida!\n";
+            }
+
+            if(jogador1.getVida() <= 0) {
+                std::cout << "\n" << jogador2.getNome() << " venceu!\n";
+                break;
+            } else if(jogador2.getVida() <= 0) {
+                std::cout << "\n" << jogador1.getNome() << " venceu!\n";
+                break;
+            }
+        }
+
+        std::cout << "Jogo encerrado!\n";
+        return 0;
+
+    } catch (const std::exception& e) {
+        std::cout << "Erro: " << e.what() << std::endl;
+        return 1;
+    } catch (...) {
+        std::cout << "Erro desconhecido ocorreu!" << std::endl;
+        return 1;
+    }
+>>>>>>> Stashed changes
 }

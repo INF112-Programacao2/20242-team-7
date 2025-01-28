@@ -31,16 +31,16 @@ class Unidade : public Carta {
     };
 
 namespace UnidadesPredefinidas {
-    extern const Unidade RX782Gundam;
-    extern const Unidade RX75Guntank;
-    extern const Unidade Guncannon;
-    extern const Unidade Ball;
-    extern const Unidade GM;
-    extern const Unidade Zeong;
-    extern const Unidade BigZam;
-    extern const Unidade Gelgoog;
-    extern const Unidade ZGok;
-    extern const Unidade Gouf;
-    extern const Unidade Zaku;
+    extern  Unidade RX782Gundam;
+    extern  Unidade RX75Guntank;
+    extern  Unidade Guncannon;
+    extern  Unidade Ball;
+    extern  Unidade GM;
+    extern  Unidade Zeong;
+    extern  Unidade BigZam;
+    extern  Unidade Gelgoog;
+    extern  Unidade ZGok;
+    extern  Unidade Gouf;
+    extern  Unidade Zaku;
 }
 #endif
