@@ -13,10 +13,7 @@ class Piloto : public Carta{
     Piloto(std::string _efeito_piloto, Unidade Unidade, std::string _Desc, std::string _Tipo, std::string _Nome, int _Custo, int _ID );
     ~Piloto();
     void fornece_efeito(Jogador& jog);
-<<<<<<< Updated upstream
     Unidade getUnidade();
-=======
->>>>>>> Stashed changes
     
 };
 
