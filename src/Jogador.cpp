@@ -4,13 +4,17 @@
 Jogador::Jogador(int _vida, std::string _nome, int _qtdCalor, std::vector<Carta*> _mao, bool _vezDeJogar)
     : vida(_vida), nome(_nome), qtdCalor(_qtdCalor), mao(_mao), vezDeJogar(_vezDeJogar) {}
 
-void Jogador::compra_carta(int indice) {
+/*void Jogador::compra_carta(int indice) {
     if (indice >= 0 && indice < baralho.quantidade_cartas()) {
         Carta* carta = baralho.seleciona_carta(indice);
         if (carta) {
             mao.push_back(carta);
         }
     }
+}*/
+
+void Jogador::compra_carta(Carta* carta) {
+    mao.push_back(carta);
 }
 
 void Jogador::joga_carta(int indice) {
@@ -54,4 +58,8 @@ int Jogador::getVida(){
 
 std::string Jogador::getNome(){
     return nome;
+}
+
+std::vector<Carta*> Jogador::getMao(){
+    return mao;
 }

@@ -1,6 +1,5 @@
 #include "../include/Carta.h"
 #include "../include/Piloto.h"
-<<<<<<< Updated upstream
 #include "../include/Unidade.h"
 #include "../include/Tatica.h"
 #include "../include/Instantaneo.h"
@@ -8,7 +7,10 @@
 #include "../include/Partida.h"
 #include "../include/Baralho.h"
 #include "../include/Jogador.h"
+
 #include <iostream>
+#include <algorithm>
+#include <random>
 
 using namespace UnidadesPredefinidas;
 using namespace EquipamentosPredefinidos;
@@ -57,46 +59,68 @@ void inicializaBaralho(Baralho& baralho) {
     baralho.adiciona_carta(new Instantaneo(ADCV));
 }
 
+void comprarCarta(Jogador& jogador, Baralho& baralho) {
+    // Embaralha o baralho
+    std::random_device rd;
+    std::mt19937 g(rd());
+    std::shuffle(baralho.cartas.begin(), baralho.cartas.end(), g);
+
+    int unidades = 0, equipamentos = 0, pilotos = 0, instantaneos = 0;
+    for (Carta* carta : baralho.cartas) {
+        if (unidades < 4 && dynamic_cast<Unidade*>(carta)) {
+            jogador.compra_carta(carta);
+            unidades++;
+        } else if (equipamentos < 2 && dynamic_cast<Equipamento*>(carta)) {
+            jogador.compra_carta(carta);
+            equipamentos++;
+        } else if (pilotos < 4 && dynamic_cast<Piloto*>(carta)) {
+            jogador.compra_carta(carta);
+            pilotos++;
+        } else if (instantaneos < 2 && dynamic_cast<Instantaneo*>(carta)) {
+            jogador.compra_carta(carta);
+            instantaneos++;
+        }
+        if (jogador.getMao().size() == 12) break;
+    }
+}
+
 int main() {
     // Cria um baralho com algumas cartas
     Baralho baralho;
     inicializaBaralho(baralho);
     //cabeçalho
     std::cout << 
-    "| ----------------------------- Burning Steel Strife ---------------------------- |\n" <<
-    "| -------------------------------- Baralho criado-------------------------------- |\n" <<
-    "|                                                                                 |\n" <<
-    "| - Quantidade de cartas no baralho: " << baralho.quantidade_cartas()                    <<
-    " ----------------------------------------- |"<< std::endl;
+    "| ----------------------------- Burning Steel Strife ---------------------------- \n" <<
+    "| -------------------------------- Baralho criado ------------------------------- \n" <<
+    "|                                                                                 \n" <<
+    "| - Quantidade de cartas no baralho: " <<  baralho.quantidade_cartas()                << std::endl;
 
 
     // Cria dois jogadores com o baralho    
     std::string j1, j2;
-    std::cout << "Digite o nome do Jogador 1: ";
+    std::cout << "|\n| Digite o nome do Jogador 1: ";
     std::cin >> j1;
-    std::cout << "Digite o nome do Jogador 2: ";
+    std::cout << "|\n| Digite o nome do Jogador 2: ";
     std::cin >> j2;
 
     
     Jogador jogador1(20, j1, 0, {}, true);
     Jogador jogador2(20, j2, 0, {}, false);
-    std::cout << "Jogadores criados\n";
+    std::cout << "|\n| - Jogadores criados\n";
 
-    std::cout << jogador1.getNome() << " x " << jogador2.getNome() << std::endl;
+    std::cout << "|\n| - " << jogador1.getNome() << " x " << jogador2.getNome() << std::endl;
 
     int indice;
 
-    for (int i = 0; i < 10 ; i++) {
-        jogador1.compra_carta(i);
-        //imprime a carta comprada
-    }
-    for (int j = 10; j < 20; j++) {
-        jogador2.compra_carta(j);
-    }
+    // Jogador 1 compra 12 cartas do baralho, sendo 4 unidades, 2 equipamentos, 4 pilotos e 2 instantâneos
+    comprarCarta(jogador1, baralho);
+
+    // Jogador 2 compra 12 cartas do baralho, sendo 4 unidades, 2 equipamentos, 4 pilotos e 2 instantâneos
+    comprarCarta(jogador2, baralho);
 
     // Cria uma partida com os dois jogadores
     Partida partida(jogador1.getNome(), jogador2.getNome());
-    std::cout << "Partida iniciada\n";
+    std::cout << "|\n| - " << "Partida iniciada\n";
 
     // Simula a partida
     while (!partida.encerra_partida(false)) {
@@ -190,151 +214,4 @@ int main() {
     partida.exibe_historico();
 
     return 0;
-=======
-#include "../include/Baralho.h"
-#include <iostream>
-#include <vector>
-
-int main() {
-    try {
-        std::cout << "Iniciando o jogo...\n";
-        
-        // Criar baralhos iniciais
-        Baralho baralho1;
-        Baralho baralho2;
-        std::cout << "Baralhos criados\n";
-
-        // Criar cópias das cartas predefinidas
-        Unidade* gundam = new Unidade(UnidadesPredefinidas::RX782Gundam);
-        Unidade* guncannon = new Unidade(UnidadesPredefinidas::Guncannon);
-        Unidade* gm = new Unidade(UnidadesPredefinidas::GM);
-        
-        Unidade* bigzam = new Unidade(UnidadesPredefinidas::BigZam);
-        Unidade* gouf = new Unidade(UnidadesPredefinidas::Gouf);
-        Unidade* zaku = new Unidade(UnidadesPredefinidas::Zaku);
-
-        // Adicionar cartas aos baralhos
-        baralho1.adiciona_carta(gundam);
-        baralho1.adiciona_carta(guncannon);
-        baralho1.adiciona_carta(gm);
-        
-        baralho2.adiciona_carta(bigzam);
-        baralho2.adiciona_carta(gouf);
-        baralho2.adiciona_carta(zaku);
-        
-        std::cout << "Cartas adicionadas aos baralhos\n";
-
-        // Receber nomes dos jogadores
-        std::string nome1, nome2;
-        std::cout << "Nome do Jogador 1: ";
-        std::getline(std::cin, nome1);
-        std::cout << "Nome do Jogador 2: ";
-        std::getline(std::cin, nome2);
-        
-        std::cout << "Criando jogadores...\n";
-
-        // Criar jogadores (vida 100, calor inicial 20)
-        Jogador jogador1(100, nome1, 20, baralho1, true);
-        Jogador jogador2(100, nome2, 20, baralho2, false);
-        
-        std::cout << "Jogadores criados com sucesso\n";
-
-        // Criar partida
-        std::cout << "Iniciando partida...\n";
-        Partida partida(nome1, nome2, false, 0, 0, "", 0);
-        
-        std::cout << "Partida criada com sucesso\n";
-
-        // Dar cartas iniciais
-        std::cout << "Distribuindo cartas iniciais...\n";
-        for(int i = 0; i < 3 && i < baralho1.quantidade_cartas(); i++) {
-            std::cout << "Tentando comprar carta " << i + 1 << " para jogador 1\n";
-            jogador1.compra_carta(i);
-        }
-        for(int i = 0; i < 3 && i < baralho2.quantidade_cartas(); i++) {
-            std::cout << "Tentando comprar carta " << i + 1 << " para jogador 2\n";
-            jogador2.compra_carta(i);
-        }
-
-        std::cout << "\nIniciando loop principal do jogo...\n";
-
-        // Loop principal do jogo
-        while(!partida.encerra_partida()) {
-            Jogador& jogador_atual = partida.getTurno() == 0 ? jogador1 : jogador2;
-            Jogador& jogador_inimigo = partida.getTurno() == 0 ? jogador2 : jogador1;
-
-            std::cout << "\n=== Turno de " << jogador_atual.getNome() << " ===\n";
-            std::cout << "Vida: " << jogador_atual.getVida() << " | Calor: " << jogador_atual.getcalor() << "\n";
-            std::cout << "Inimigo - Vida: " << jogador_inimigo.getVida() << "\n\n";
-
-            std::cout << "Sua mão:\n";
-            jogador_atual.verMao();
-
-            std::cout << "\nSeu campo:\n";
-            for(const auto& carta : jogador_atual.getCampo()) {
-                if(auto unidade = dynamic_cast<Unidade*>(carta)) {
-                    std::cout << unidade->getNome() << " (ATK:" << unidade->getAtk() 
-                             << " HP:" << unidade->getHp() << ")\n";
-                }
-            }
-
-            std::cout << "\nAções disponíveis:\n";
-            std::cout << "1. Jogar carta\n";
-            std::cout << "2. Atacar\n";
-            std::cout << "3. Passar turno\n";
-            std::cout << "4. Encerrar jogo\n";
-            std::cout << "Escolha uma ação: ";
-            
-            int escolha;
-            std::cin >> escolha;
-            std::cin.ignore(); // Limpar o buffer
-
-            switch(escolha) {
-                case 1: {
-                    if(jogador_atual.mao.empty()) {
-                        std::cout << "Sem cartas na mão!\n";
-                        break;
-                    }
-                    
-                    std::cout << "Escolha a carta para jogar (0-" << jogador_atual.mao.size()-1 << "): ";
-                    int index;
-                    std::cin >> index;
-                    std::cin.ignore();
-                    
-                    if(index >= 0 && index < jogador_atual.mao.size()) {
-                        jogador_atual.joga_carta(index);
-                        std::cout << "Carta jogada com sucesso!\n";
-                    }
-                    break;
-                }
-                // ... resto do código do switch permanece o mesmo ...
-                
-                case 4:
-                    std::cout << "Encerrando partida...\n";
-                    partida.encerra_partida(true);
-                    break;
-                default:
-                    std::cout << "Opção inválida!\n";
-            }
-
-            if(jogador1.getVida() <= 0) {
-                std::cout << "\n" << jogador2.getNome() << " venceu!\n";
-                break;
-            } else if(jogador2.getVida() <= 0) {
-                std::cout << "\n" << jogador1.getNome() << " venceu!\n";
-                break;
-            }
-        }
-
-        std::cout << "Jogo encerrado!\n";
-        return 0;
-
-    } catch (const std::exception& e) {
-        std::cout << "Erro: " << e.what() << std::endl;
-        return 1;
-    } catch (...) {
-        std::cout << "Erro desconhecido ocorreu!" << std::endl;
-        return 1;
-    }
->>>>>>> Stashed changes
 }

@@ -11,13 +11,12 @@ public:
     std::string nome;
     std::vector<Carta*> mao;
     int qtdCalor;
-    Baralho baralho;
     std::vector<Carta*> pilha_descarte;
     std::vector<Carta*> campo;
     bool vezDeJogar;
 
     Jogador(int _vida, std::string _nome, int _qtdCalor, std::vector<Carta*> _mao, bool _vezDeJogar);
-    void compra_carta(int qtd);
+    void compra_carta(Carta* carta);
     void joga_carta(int ID);
     void declara_efeito(Carta* c);
     void encerra_turno();
@@ -28,6 +27,7 @@ public:
     int getcalor();
     void setcalor(int _calor);
     int getVida();
+    std::vector<Carta*> getMao();
     std::string getNome();
      
     
