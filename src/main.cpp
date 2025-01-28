@@ -59,7 +59,7 @@ void inicializaBaralho(Baralho& baralho) {
     baralho.adiciona_carta(new Instantaneo(ADCV));
 }
 
-void comprarCarta(Jogador& jogador, Baralho& baralho) {
+void iniciarMao(Jogador& jogador, Baralho& baralho) {
     // Embaralha o baralho
     std::random_device rd;
     std::mt19937 g(rd());
@@ -113,10 +113,10 @@ int main() {
     int indice;
 
     // Jogador 1 compra 12 cartas do baralho, sendo 4 unidades, 2 equipamentos, 4 pilotos e 2 instantâneos
-    comprarCarta(jogador1, baralho);
+    iniciarMao(jogador1, baralho);
 
     // Jogador 2 compra 12 cartas do baralho, sendo 4 unidades, 2 equipamentos, 4 pilotos e 2 instantâneos
-    comprarCarta(jogador2, baralho);
+    iniciarMao(jogador2, baralho);
 
     // Cria uma partida com os dois jogadores
     Partida partida(jogador1.getNome(), jogador2.getNome());

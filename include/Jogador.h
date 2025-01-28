@@ -22,6 +22,7 @@ public:
     void encerra_turno();
     void descarta(const Carta* carta);
     void verMao();
+    void iniciarMao(Baralho baralho);
 
     void declara_ataque(Unidade atacante, Unidade defensora);
     int getcalor();

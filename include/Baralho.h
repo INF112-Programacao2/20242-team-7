@@ -10,6 +10,7 @@ public:
     std::string nome;
     int IDBaralho;
 
+    void inicializaBaralho(Baralho& baralho);
     Carta* seleciona_carta(int qtd);
 
     void adiciona_carta(Carta* carta);

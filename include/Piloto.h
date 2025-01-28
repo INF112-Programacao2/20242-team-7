@@ -18,14 +18,14 @@ class Piloto : public Carta{
 };
 
 namespace PilotosPredefinidos{
-    extern const Piloto AmuroRay;
-    extern const Piloto KayShiden;
-    extern const Piloto HayatoKobayashi;
-    extern const Piloto PilotoFederacao;
-    extern const Piloto CharAznable;
-    extern const Piloto DozleZabi;
-    extern const Piloto RambaRal;
-    extern const Piloto PilotoZeon;
+    extern Piloto AmuroRay;
+    extern Piloto KayShiden;
+    extern Piloto HayatoKobayashi;
+    extern Piloto PilotoFederacao;
+    extern Piloto CharAznable;
+    extern Piloto DozleZabi;
+    extern Piloto RambaRal;
+    extern Piloto PilotoZeon;
 }
 
 

@@ -14,13 +14,13 @@ class Instantaneo : public Tatica{
 };
 
 namespace InstanteneoPredefinidos{
-    extern const Instantaneo SistemaRaioSolar;
-    extern const Instantaneo OperacaoBritanica;
-    extern const Instantaneo ReforcosDaFederacao;
-    extern const Instantaneo NovaInvestida;
-    extern const Instantaneo INEUZaku;
-    extern const Instantaneo DesengajarCombate;
-    extern const Instantaneo CINADSN;
-    extern const Instantaneo ADCV;
+    extern Instantaneo SistemaRaioSolar;
+    extern Instantaneo OperacaoBritanica;
+    extern Instantaneo ReforcosDaFederacao;
+    extern Instantaneo NovaInvestida;
+    extern Instantaneo INEUZaku;
+    extern Instantaneo DesengajarCombate;
+    extern Instantaneo CINADSN;
+    extern Instantaneo ADCV;
 }
 #endif
