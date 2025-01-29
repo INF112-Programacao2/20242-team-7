@@ -23,13 +23,13 @@ public:
     void descarta(const Carta* carta);
     void verMao();
     void iniciarMao(Baralho baralho);
-
     void declara_ataque(Unidade atacante, Unidade defensora);
     int getcalor();
     void setcalor(int _calor);
     int getVida();
     std::vector<Carta*> getMao();
     std::string getNome();
+    void verCampo();
      
     
 };

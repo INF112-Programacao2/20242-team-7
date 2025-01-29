@@ -36,10 +36,7 @@ void Unidade::receberDano(int dano){
 }
 
 void Unidade::Atacar(Unidade &Outra){
-    int dano = Atk - Outra.getDef();
-    if(dano>0){
-        Outra.receberDano(dano);
-    }
+        Outra.receberDano(Atk);
 }
 
 bool Unidade::isEquiped(){
@@ -51,7 +48,7 @@ void Unidade::setHp(int _hp){
 }
 
 void Unidade::le()const {
-    std::cout <<Atk<<std::endl<<Def<<std::endl<<Hp<<std::endl<<Descricao<<std::endl <<Tipo<<std::endl <<Nome<<std::endl <<Equip<<std::endl;
+    std::cout <<"Ataque : "<<Atk<<std::endl<<"HP : "<<Hp<<std::endl<<"Descricao :"<<Descricao<<std::endl <<"Tipo :"<<Tipo<<std::endl <<"Nome : "<<Nome<<std::endl <<"Piloto? :"<< Equip<<std::endl;
 }
 
 void Unidade::setAtk(int _Atk) {

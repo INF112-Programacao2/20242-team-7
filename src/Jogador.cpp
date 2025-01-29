@@ -23,6 +23,13 @@ void Jogador::verMao() {
     }
 }
 
+void Jogador::verCampo() {
+    for (int i = 0; i < campo.size(); ++i) {
+        Carta* carta = campo[i];
+        std::cout << "\t[" << i+1 << "] " << carta->getNome() << " " << carta->getTipo() <<  std::endl;
+    }
+}
+
 void Jogador::descarta(const Carta* carta) {
     // seleciona uma carta da mão e descarta
     auto it = std::find_if(mao.begin(), mao.end(), [&](const Carta* c) { return *c == *carta; });

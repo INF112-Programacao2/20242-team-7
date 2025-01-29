@@ -136,6 +136,11 @@ int main() {
             int opcao;
             std::cin >> opcao;
 
+            Carta* carta = nullptr;
+            Unidade* unidade = nullptr;
+            Carta* cartainimigo = nullptr;
+            Unidade* unidadeinimigo = nullptr;
+
             switch (opcao)
             {
             case 1:
@@ -145,10 +150,59 @@ int main() {
                 jogador1.joga_carta(indice-1);
                 break;
             case 2:
-                std::cout << "Atacar\n";
+
+                std::cout << "Atacar\nDigite qual carta deseja usar para atacar";
+                jogador1.verCampo();
+                int escolha;
+                std::cin>>escolha;
+
+
+
+                if (escolha < 1 || escolha > jogador1.campo.size()) {
+                    std::cout << "Escolha invalida! Selecione uma posicao valida." << " escolha : " << escolha << " posicao : " << jogador1.campo.size() << std::endl;
+                    break;
+                }
+
+                 carta = jogador1.campo[escolha-1];  // Obtém o objeto Carta
+            
+                 if (carta == nullptr) {
+                    std::cout << "Nenhuma carta encontrada na posição escolhida!" << std::endl;
+                    break;
+                }
+
+                
+               
+                 unidade = dynamic_cast<Unidade*>(carta);  // Tenta fazer o cast para Unidade
+                 std::cout<<"chegou aquii"<<std::endl;
+
+                if (unidade) {
+                    // Se o cast foi bem-sucedido, você pode chamar métodos de Unidade
+                    std::cout<<"Campo do inimigo :"<<std::endl;
+                    jogador2.verCampo();
+                    std::cout<<"Escolha qual carta deseja atacar"<<std::endl;
+                    std::cin>>escolha;
+                     cartainimigo = jogador2.campo[escolha-1];  // Obtém o objeto Carta inimigo
+                     unidadeinimigo = dynamic_cast<Unidade*>(cartainimigo);  // Tenta fazer o cast para Unidade
+                    if(unidadeinimigo){
+                        unidade->le();
+                        unidadeinimigo->le();
+                        std::cout<<"HP Antes: "<<unidadeinimigo->getHp()<<std::endl;
+                        unidade->Atacar(*unidadeinimigo);
+                        //unidadeinimigo->receberDano(unidade->getAtk()); desnecessário, já está funcionando!
+                        std::cout<<"HP Depois: "<<unidadeinimigo->getHp()<<std::endl;
+
+
+                    }
+
+                    
+                } else {
+                    // Se o cast falhar, significa que a Carta não é do tipo Unidade
+                    std::cout << "A carta não é do tipo Unidade!" << std::endl;
+                }
+
                 break;
-            case 3:
-                break;
+            //case 3:
+             //   break;
             case 4:
                 partida.encerra_partida(true);
                 break;
@@ -179,8 +233,8 @@ int main() {
             case 1:
                 std::cout << "Digite o numero da carta: ";
                 std::cin >> indice;
-                jogador1.joga_carta(indice-1);
-                jogador2.joga_carta(0);
+                //jogador1.joga_carta(indice-1); //duplicado
+                jogador2.joga_carta(indice-1);
                 break;
             case 2:
                 std::cout << "Atacar\n";
