@@ -43,7 +43,7 @@ int main() {
     //Ambos os jogadpres são criados com 20 de calor e uma mão vazia.
     //O jogador 1 começa o jogo, o primeiro turno é dele, por isso recebe +5 de calor.
     Jogador jogador1(20, j1, 25, {}, true);
-    Jogador jogador2(20, j2, 20, {}, false);
+    Jogador jogador2(20, j2, 25, {}, false);
     std::cout << "|\n| - Jogadores criados\n";
 
     std::cout << "|\n| - " << jogador1.getNome() << " x " << jogador2.getNome() << std::endl;
@@ -224,7 +224,7 @@ int main() {
                             std::cout<<"Vida do jogador inimigo após o ataque : "<<jogador2.getVida()<<std::endl;
                             partida.passa_turno();
                             std::cout<<"|\n| - rodada do jogador 2!"<<std::endl;
-                            jogador2.setcalor(jogador2.getcalor()+5); // No início de cada turno, os jogadores recebem +5 de calor
+                            
                             break;
                         }
                         break;
@@ -282,7 +282,6 @@ int main() {
 
             std::cout << "|\n| - " <<"Mao Jogador: " << jogador2.getNome() << std::endl;
             jogador2.verMao();
-
             std::cout<< "|\n| -Calor:" << jogador2.getcalor()<<std::endl;
         
             std::cout << 
