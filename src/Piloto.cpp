@@ -1,16 +1,14 @@
-#include "../include/Piloto.h"
-#include "../include/Carta.h"
-#include "../include/Unidade.h"
-#include "../include/Jogador.h"
-
-#include <iostream>
-#include <exception>
-#include <stdexcept>
-
+   #include "../include/Piloto.h"
+   #include "../include/Carta.h"
+   #include "../include/Jogador.h"
+   #include <iostream>
+   #include <exception>
+   #include <stdexcept>
+   
    
    
 
-Piloto :: Piloto(std::string _efeito_piloto, Unidade* _unidade_tripulada, std::string _Desc, std::string _Tipo, std::string _Nome, int _Custo, int _ID)
+Piloto :: Piloto(std::string _efeito_piloto, Unidade _unidade_tripulada, std::string _Desc, std::string _Tipo, std::string _Nome, int _Custo, int _ID)
     :Carta(_Desc, _Tipo, _Nome, _Custo, _ID),//Chama o construtor da superclasse
     unidade_tripulada(_unidade_tripulada),//Unidade do piloto
     efeito_piloto(_efeito_piloto){ //Efeito do piloto
@@ -20,7 +18,7 @@ Piloto::~Piloto(){
         //Nada no destrutor, sem alocação dinâmica
     }
 
-Unidade* Piloto::getUnidade(){
+Unidade Piloto::getUnidade(){
     return unidade_tripulada;
 }
 
@@ -37,18 +35,15 @@ void Piloto::fornece_efeito(Jogador& jog) {
 
     switch (ID) {
         case 1: // Amuro Ray
-            // Aplica o efeito na unidade associada (se existir)
-            if (unidade_tripulada->getPiloto() == this) {
-                unidade_tripulada->setHp(unidade_tripulada->getHp() + 25);
-            }
-            if (unidade_tripulada->getNome() == "RX78-2 GUNDAM") {
-                unidade_tripulada->ativaEvasao();
+            unidade_tripulada.setHp(unidade_tripulada.getHp() + 25);
+            if (unidade_tripulada.getNome() == "RX78-2 GUNDAM") {
+                unidade_tripulada.ativaEvasao();
             }
             break;
 
         case 2: // Kay Shiden
-            if (unidade_tripulada->getTipo() == "Heroi") {
-                unidade_tripulada->setAtk(unidade_tripulada->getAtk() + 30);
+            if (unidade_tripulada.getTipo() == "Heroi") {
+                unidade_tripulada.setAtk(unidade_tripulada.getAtk() + 30);
             }
             break;
 
@@ -69,7 +64,7 @@ void Piloto::fornece_efeito(Jogador& jog) {
                     }
                     else{
                         jog.setcalor(jog.getcalor()-2); //Gasta 2 calor
-                        unidade_tripulada = &UnidadesPredefinidas::RX75Guntank; //Transforma a unidade em RX75
+                        unidade_tripulada = UnidadesPredefinidas::RX75Guntank; //Transforma a unidade em RX75
                     }
                 } else {
                     throw std::out_of_range("Opção inválida. Por favor, escolha 0 ou 1.");
@@ -93,7 +88,7 @@ void Piloto::fornece_efeito(Jogador& jog) {
                 for (int i = 0; i < indicesF.size(); i++) { // Percorre índices
                     Piloto* piloto = dynamic_cast<Piloto*>(jog.campo[indicesF[i]]);
                     if (piloto) {
-                        piloto->unidade_tripulada->setHp(piloto->unidade_tripulada->getHp() + 15);
+                        piloto->unidade_tripulada.setHp(piloto->unidade_tripulada.getHp() + 15);
                         // As cartas em campo, que são tripuladas por pilotos genéricos da federação recebem +15 de vida.
                     }
                 }
@@ -117,7 +112,7 @@ void Piloto::fornece_efeito(Jogador& jog) {
                     for (int i = 0; i < indicesP.size(); i++) { // Percorre índices
                         Piloto* piloto = dynamic_cast<Piloto*>(jog.campo[indicesF[i]]);
                         if (piloto) {
-                        piloto->unidade_tripulada->setHp(piloto->unidade_tripulada->getHp() + 20);
+                        piloto->unidade_tripulada.setHp(piloto->unidade_tripulada.getHp() + 20);
                         // As cartas em campo, que são tripuladas por pilotos tipo peao da federação recebem +20 de vida.
                         }
                 }
@@ -126,12 +121,12 @@ void Piloto::fornece_efeito(Jogador& jog) {
 
         case 6:// Dozle Zabi
             std::cout<<"Se a sua unidade tripulada for do tipo heroi, voce pode gastar 2 de calor, e receber +15 pontos de ATK" <<std::endl;
-            if(unidade_tripulada->getTipo()=="Heroi"){
+            if(unidade_tripulada.getTipo()=="Heroi"){
                 std::cout<<"Selecione uma opcao;\n 0-Nao\n 1-Sim\n";
                 std::cin>>decide;
-                if(decide==1 && jog.getcalor()>=1){
+                if(decide==1 &&jog.getcalor()>=1){
                      jog.setcalor(jog.getcalor()-1); //Gasta  calor
-                        unidade_tripulada->setAtk(unidade_tripulada->getAtk()+15); //Sobe o atk em 15 pontos
+                        unidade_tripulada.setAtk(unidade_tripulada.getAtk()+15); //Sobe o atk em 15 pontos
                 }
                 if(decide==0 || jog.getcalor()<1){
                     std::cout<<"A acao nao sera realizada por escolha do jogador, ou porque o mesmo nao possui calor suficiente. " <<std::endl;
@@ -145,7 +140,7 @@ void Piloto::fornece_efeito(Jogador& jog) {
             std::cin>>decide;
             if(decide==1 && jog.getcalor()>=2){
                 jog.setcalor(jog.getcalor()-2);
-                unidade_tripulada->ativaEvasao();
+                unidade_tripulada.ativaEvasao();
             }
             else{
                 std::cout<<"A acao nao sera realizada por escolha do jogador, ou porque o mesmo nao possui calor suficiente. " <<std::endl;
@@ -167,7 +162,7 @@ void Piloto::fornece_efeito(Jogador& jog) {
                 for (int i = 0; i < indicesZ.size(); i++) { // Percorre índices
                     Piloto* piloto = dynamic_cast<Piloto*>(jog.campo[indicesF[i]]);
                     if (piloto) {
-                        piloto->unidade_tripulada->setAtk(piloto->unidade_tripulada->getAtk() + 15);
+                        piloto->unidade_tripulada.setAtk(piloto->unidade_tripulada.getAtk() + 15);
                         // As cartas em campo, que são tripuladas por pilotos genéricos da federação recebem +15 de vida.
                     }
                 }

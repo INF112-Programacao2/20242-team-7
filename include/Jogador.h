@@ -30,6 +30,7 @@ public:
     int getVida();
     std::vector<Carta*> getMao();
     std::string getNome();
+    void setvida(int vida);
      
     
 };

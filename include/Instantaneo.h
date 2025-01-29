@@ -2,12 +2,8 @@
 #define INSTANTANEO_H
 
 #include "../include/Tatica.h"
-#include "../include/Jogador.h"
-#include "../include/Unidade.h"
-
 class Jogador;
 class Unidade;
-class Tatica;
 
 class Instantaneo : public Tatica{
     public:

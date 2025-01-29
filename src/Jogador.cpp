@@ -74,3 +74,7 @@ std::string Jogador::getNome(){
 std::vector<Carta*> Jogador::getMao(){
     return mao;
 }
+
+void Jogador::setvida(int _vida){
+    vida = _vida;
+}

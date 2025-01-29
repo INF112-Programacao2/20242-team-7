@@ -129,8 +129,9 @@ int main() {
                     }else{
                         unidade = dynamic_cast<Unidade*>(jogador1.campo[escolha-1]);  // Tenta fazer o cast para Unidade
                         Piloto* piloto = dynamic_cast<Piloto*>(carta);
+                        unidade->setPiloto(piloto->getNome());
+                        std::cout << "|\t - Pilotado com sucesso: " << piloto -> getNome() << std::endl;
                         unidade -> le();
-                        std::cout << "|\t - Pilotado com sucesso: " << carta->getNome() << std::endl;
                         carta->gasta_calor(carta->getCusto(), jogador1);//Debita o custo da carta do calor do jogador
                     }
                 }
@@ -144,8 +145,8 @@ int main() {
 
                     unidade = dynamic_cast<Unidade*>(jogador1.campo[escolha-1]);  // Tenta fazer o cast para Unidade
                     Equipamento* equipamento = dynamic_cast<Equipamento*>(carta);
-                    unidade -> le();
-                    equipamento->fornece_efeito(unidade, jogador1);
+                    
+                    equipamento->fornece_efeito(*unidade, jogador1);
                     unidade->le();
                     std::cout << "|\t - Equipado com sucesso: " << carta->getNome() << std::endl;
                     carta->gasta_calor(carta->getCusto(), jogador1);//Debita o custo da carta do calor do jogador
@@ -160,7 +161,7 @@ int main() {
 
                     unidade = dynamic_cast<Unidade*>(jogador1.campo[escolha-1]);  // Tenta fazer o cast para Unidade
                     Instantaneo* instantaneo = dynamic_cast<Instantaneo*>(carta);
-                    unidade -> le();
+                    
                     instantaneo->fornece_efeito(jogador1,jogador2);
                     unidade->le();
                     std::cout << "|\t - Efeito do instantâneo fornecido: " << carta->getNome() << std::endl;
@@ -176,8 +177,8 @@ int main() {
 
                     unidade = dynamic_cast<Unidade*>(jogador1.campo[escolha-1]);  // Tenta fazer o cast para Unidade
                     Tatica* tatica = dynamic_cast<Tatica*>(carta);
-                    unidade -> le();
-                    tatica->fornece_efeito(unidade, jogador1);
+                    
+                    tatica->fornece_efeito(*unidade, jogador1);
                     unidade->le();
                     std::cout << "|\t - Efeito da tática fornecido: " << carta->getNome() << std::endl;
                     carta->gasta_calor(carta->getCusto(), jogador1);//Debita o custo da carta do calor do jogador
@@ -214,6 +215,21 @@ int main() {
                     // Se o cast foi bem-sucedido, você pode chamar métodos de Unidade
                     std::cout<<"Campo do inimigo :";
                     jogador2.verCampo();
+                    if (jogador2.campo.empty()) {
+                        std::cout << "Deseja atacar diretamente o jogador inimigo? (s/n) ";
+                        char resposta;
+                        std::cin >> resposta;
+                        if (resposta == 's') {
+                            jogador2.setvida(jogador2.getVida() - unidade->getAtk());
+                            std::cout << "|\n| - " <<"Ataque realizado com sucesso!" << std::endl;
+                            std::cout<<"Vida do jogador inimigo após o ataque : "<<jogador2.getVida()<<std::endl;
+                            partida.passa_turno();
+                            std::cout<<"|\n| - rodada do jogador 2!"<<std::endl;
+                            jogador2.setcalor(jogador2.getcalor()+5); // No início de cada turno, os jogadores recebem +5 de calor
+                            break;
+                        }
+                        break;
+                    }
                     std::cout<<"Escolha qual carta deseja atacar : ";
                     std::cin>>escolha;
                     std::cout<<std::endl;
@@ -267,6 +283,8 @@ int main() {
 
             std::cout << "|\n| - " <<"Mao Jogador: " << jogador2.getNome() << std::endl;
             jogador2.verMao();
+
+            std::cout<< "|\n| -Calor:" << jogador2.getcalor()<<std::endl;
         
             std::cout << 
             "|\n| - 1 - Jogar Carta\n"
@@ -321,9 +339,10 @@ int main() {
                     }else{
                         unidade = dynamic_cast<Unidade*>(jogador2.campo[escolha-1]);  // Tenta fazer o cast para Unidade
                         Piloto* piloto = dynamic_cast<Piloto*>(carta);
-                        unidade -> le();
-                        std::cout << "|\t - Pilotado com sucesso: " << carta->getNome() << std::endl;
-                        carta->gasta_calor(carta->getCusto(), jogador1);//Debita o custo da carta do calor do jogador
+                        unidade->setPiloto(piloto->getNome());
+                        std::cout << "|\t - Pilotado com sucesso: " << piloto -> getNome() << std::endl;
+                        
+                        piloto->gasta_calor(piloto->getCusto(), jogador1);//Debita o custo da carta do calor do jogador
                     }
                 }
 
@@ -336,7 +355,7 @@ int main() {
 
                     unidade = dynamic_cast<Unidade*>(jogador2.campo[escolha-1]);  // Tenta fazer o cast para Unidade
                     Equipamento* equipamento = dynamic_cast<Equipamento*>(carta);
-                    unidade -> le();
+                    
                     equipamento->fornece_efeito(*unidade, jogador2);
                     unidade->le();
                     std::cout << "|\t - Equipado com sucesso: " << carta->getNome() << std::endl;
@@ -352,7 +371,7 @@ int main() {
 
                     unidade = dynamic_cast<Unidade*>(jogador2.campo[escolha-1]);  // Tenta fazer o cast para Unidade
                     Instantaneo* instantaneo = dynamic_cast<Instantaneo*>(carta);
-                    unidade -> le();
+                    
                     instantaneo->fornece_efeito(jogador2,jogador1);
                     unidade->le();
                     std::cout << "|\t - Efeito do instantâneo fornecido: " << carta->getNome() << std::endl;
@@ -368,7 +387,7 @@ int main() {
 
                     unidade = dynamic_cast<Unidade*>(jogador2.campo[escolha-1]);  // Tenta fazer o cast para Unidade
                     Tatica* tatica = dynamic_cast<Tatica*>(carta);
-                    unidade -> le();
+                    
                     tatica->fornece_efeito(*unidade, jogador2);
                     unidade->le();
                     std::cout << "|\t - Efeito da tática fornecido: " << carta->getNome() << std::endl;
@@ -408,6 +427,21 @@ int main() {
                     // Se o cast foi bem-sucedido, você pode chamar métodos de Unidade
                     std::cout<<"Campo do inimigo :";
                     jogador1.verCampo();
+                    if (jogador1.campo.empty()) {
+                        std::cout << "Deseja atacar diretamente o jogador inimigo? (s/n) ";
+                        char resposta;
+                        std::cin >> resposta;
+                        if (resposta == 's') {
+                            jogador1.setvida(jogador1.getVida() - unidade->getAtk());
+                            std::cout << "|\n| - " <<"Ataque realizado com sucesso!" << std::endl;
+                            std::cout<<"Vida do jogador inimigo após o ataque : "<<jogador1.getVida()<<std::endl;
+                            partida.passa_turno();
+                            std::cout<<"|\n| - rodada do jogador 1!"<<std::endl;
+                            jogador2.setcalor(jogador2.getcalor()+5); // No início de cada turno, os jogadores recebem +5 de calor
+                            break;
+                        }
+                        break;
+                    }
                     std::cout<<"Escolha qual carta deseja atacar :";
                     std::cin>>escolha;
                     std::cout<<std::endl;
@@ -442,7 +476,7 @@ int main() {
                 break;
             case 6:
                 partida.passa_turno();
-                jogador1.setcalor(jogador1.getcalor()+5);
+                jogador2.setcalor(jogador2.getcalor()+5);
                 break;
             case 7:
                 std::cout << "|\n| - " <<"Saindo\n";
