@@ -18,6 +18,23 @@ void Jogador::joga_carta(int indice) {
     }
 }
 
+void Jogador::descarta(const Carta* carta) {
+    // seleciona uma carta da mão e descarta
+    auto it = std::find_if(mao.begin(), mao.end(), [&](const Carta* c) { return *c == *carta; });
+    if (it != mao.end()) {
+        pilha_descarte.push_back(*it);
+        mao.erase(it);
+    }
+}
+
+void Jogador::declara_ataque(Unidade atacante, Unidade defensora){
+    atacante.Atacar(defensora);
+}
+
+void Jogador::declara_efeito(Carta* c){
+    c->fornece_efeito();
+}
+
 //Funcoes de impressao no terminal
 
 void Jogador::verMao() {
@@ -33,19 +50,7 @@ void Jogador::verCampo() {
         Carta* carta = campo[i];
         std::cout << "\t[" << i+1 << "] " << carta->getNome() << " " << carta->getTipo() <<  std::endl;
     }
-}
-
-void Jogador::descarta(const Carta* carta) {
-    // seleciona uma carta da mão e descarta
-    auto it = std::find_if(mao.begin(), mao.end(), [&](const Carta* c) { return *c == *carta; });
-    if (it != mao.end()) {
-        pilha_descarte.push_back(*it);
-        mao.erase(it);
-    }
-}
-
-void Jogador::declara_ataque(Unidade atacante, Unidade defensora){
-    atacante.Atacar(defensora);
+    std::cout << std::endl;
 }
 
 /*-------------------------------------------------------------------------*/

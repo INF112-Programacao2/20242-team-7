@@ -93,11 +93,85 @@ int main() {
                 std::cout << "|\n| - " <<"Digite o numero da carta: ";
                 std::cin >> indice;
 
-                jogador1.joga_carta(indice-1);
+
+                carta = jogador1.mao[indice-1];  // Obtém o objeto Carta
+                // se a carta for uma unidade, ela é colocada no campo
+                if (dynamic_cast<Unidade*>(carta)) {
+                    jogador1.joga_carta(indice-1);
+                    std::cout << "|\t - Carta jogada no campo: " << carta->getNome() << std::endl;
+                }
+                //se a carta for um piloto, ela é colocada em uma unidade
+                else if (dynamic_cast<Piloto*>(carta)) {
+                    int escolha;
+
+                    std::cout << "|\n| - " <<"Pilotar\n| - Digite qual carta deseja pilotar"
+                        "\n| - Para deixar piloto em campo, digite 0" << std::endl;
+                    
+                    jogador1.verCampo();
+                    std::cout << "|\n » ";
+                    std::cin>>escolha;
+
+                    if(escolha == 0){
+                        jogador1.joga_carta(indice-1);
+                        std::cout << "|\t - Carta jogada no campo: " << carta->getNome() << std::endl;
+                        break;
+                    }else{
+                        unidade = dynamic_cast<Unidade*>(jogador1.campo[escolha-1]);  // Tenta fazer o cast para Unidade
+                        Piloto* piloto = dynamic_cast<Piloto*>(carta);
+                        unidade -> le();
+                        std::cout << "|\t - Pilotado com sucesso: " << carta->getNome() << std::endl;
+                    }
+                }
+                //se a carta for um equipamento, ela é equipada em uma unidade
+                else if (dynamic_cast<Equipamento*>(carta)) {
+                    int escolha;
+
+                    std::cout << "|\n| - " <<"Equipar\n| - Digite a qual carta deseja fornecer equipamento";
+                    jogador1.verCampo();
+                    std::cin>>escolha;
+
+                    unidade = dynamic_cast<Unidade*>(jogador1.campo[escolha-1]);  // Tenta fazer o cast para Unidade
+                    Equipamento* equipamento = dynamic_cast<Equipamento*>(carta);
+                    unidade -> le();
+                    equipamento->fornece_efeito(*unidade, jogador1);
+                    unidade->le();
+                    std::cout << "|\t - Equipado com sucesso: " << carta->getNome() << std::endl;
+                }
+
+                else if (dynamic_cast<Instantaneo*>(carta)) {
+                    int escolha;
+
+                    std::cout << "|\n| - " <<"Fornecer efeito\n| - Digite qual carta deseja fornecer efeito";
+                    jogador1.verCampo();
+                    std::cin>>escolha;
+
+                    unidade = dynamic_cast<Unidade*>(jogador1.campo[escolha-1]);  // Tenta fazer o cast para Unidade
+                    Instantaneo* instantaneo = dynamic_cast<Instantaneo*>(carta);
+                    unidade -> le();
+                    instantaneo->fornece_efeito(jogador1,jogador2);
+                    unidade->le();
+                    std::cout << "|\t - Efeito do instantâneo fornecido: " << carta->getNome() << std::endl;
+                }
+                
+                else if (dynamic_cast<Tatica*>(carta)) {
+                    int escolha;
+
+                    std::cout << "|\n| - " <<"Fornecer efeito\n| - Digite qual carta deseja fornecer efeito";
+                    jogador1.verCampo();
+                    std::cin>>escolha;
+
+                    unidade = dynamic_cast<Unidade*>(jogador1.campo[escolha-1]);  // Tenta fazer o cast para Unidade
+                    Tatica* tatica = dynamic_cast<Tatica*>(carta);
+                    unidade -> le();
+                    tatica->fornece_efeito(*unidade, jogador1);
+                    unidade->le();
+                    std::cout << "|\t - Efeito da tática fornecido: " << carta->getNome() << std::endl;
+                }
+
                 break;
             case 2:
 
-                std::cout << "|\n| - " <<"Atacar\n| - Digite qual carta deseja usar para atacar";
+                std::cout << "|\n| - " <<"Atacar\n| - Digite qual carta deseja usar para atacar" << std::endl;
                 jogador1.verCampo();
                 int escolha;
                 std::cin>>escolha;
@@ -200,7 +274,7 @@ int main() {
                 break;
             case 2:
 
-                std::cout << "|\n| - " <<"Atacar\n| - Digite qual carta deseja usar para atacar";
+                std::cout << "|\n| - " <<"Atacar\n| - Digite qual carta deseja usar para atacar" << std::endl;
                 jogador2.verCampo();
                 int escolha;
                 std::cin>>escolha;

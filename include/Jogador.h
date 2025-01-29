@@ -19,16 +19,17 @@ public:
     void compra_carta(Carta* carta);
     void joga_carta(int ID);
     void declara_efeito(Carta* c);
-    void encerra_turno();
     void descarta(const Carta* carta);
-    void verMao();
     void declara_ataque(Unidade atacante, Unidade defensora);
+
+    void verMao();
+    void verCampo();
+
     int getcalor();
     void setcalor(int _calor);
     int getVida();
     std::vector<Carta*> getMao();
     std::string getNome();
-    void verCampo();
      
     
 };
