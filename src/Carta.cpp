@@ -1,38 +1,42 @@
 #include "../include/Carta.h"
 #include "../include/Jogador.h"
 
-
+//Métodos de acesso:
 int Carta::getID() {
-    return ID;
+    return ID; //Retorna o ID
 }
 
 int Carta::getCusto() {
-    return Custo;
+    return Custo; //Retorna
 }
 
 std::string Carta::getTipo() {
-    return Tipo;
+    return Tipo; //Retorna o tipo da carta
 }
 
 std::string Carta::getNome(){
-    return Nome;
+    return Nome; //Retorna o nome
 }
 
+//Construtor:
 Carta::Carta(std::string _Desc, std::string _Tipo, std::string _Nome, int _Custo, int _ID)
     : Descricao(_Desc), Tipo(_Tipo), Nome(_Nome), Custo(_Custo), ID(_ID) {}
 
+//Destrutor:
 Carta::~Carta() {} 
 
-void Carta::gasta_calor(int custo, Jogador& jogador){
-    jogador.setcalor(jogador.getcalor() - custo);
+void Carta::gasta_calor(int custo, Jogador& jogador){ //Gasta calor
+    jogador.setcalor(jogador.getcalor() - custo); // seta o valor de calor no valor da quantidade atual
+                                                  // possuída pelo jogador, menos o custo da carta
 }
 void Carta::gera_calor(int qtd, Jogador& jogador){
-    jogador.setcalor(jogador.getcalor() + qtd);
+    jogador.setcalor(jogador.getcalor() + qtd); //Seta calor com a quanidade anterior + o que foi gerado.
+                                                // É usada no efeitos especiais de algumas das cartas
 }
 
- void Carta::fornece_efeito(){}
+ void Carta::fornece_efeito(){} //Específico pra cada carta, implementado nas subclasses
 
-void Carta::setCusto(int custo){
+void Carta::setCusto(int custo){ //Custo
     Custo = custo;
 }
 
