@@ -42,8 +42,13 @@ void Unidade::setHp(int _hp){
     Hp = _hp;
 }
 
-void Unidade::le()const {
-    std::cout <<"Ataque : "<<Atk<<std::endl<<"HP : "<<Hp<<std::endl<<"Descricao :"<<Descricao<<std::endl <<"Tipo :"<<Tipo<<std::endl <<"Nome : "<<Nome<<std::endl <<"Piloto? :"<< Equip<<std::endl;
+void Unidade::le(){
+    std::cout << "| \t* Ataque : " << Atk << std::endl 
+              << "| \t* HP : "<< Hp << std::endl 
+              << "| \t* Descricao :" << Descricao << std::endl
+              << "| \t* Tipo :" << Tipo <<std::endl
+              << "| \t* Nome : " << Nome << std::endl
+              << "| \t* Piloto: " << pilotoAssociado <<std::endl;
 }
 
 void Unidade::setAtk(int _Atk) {
@@ -62,5 +67,11 @@ void Unidade::ativaEvasao(){
     Evasao=true;
 }
 
+void Unidade::setPiloto(std::string _piloto){
+    pilotoAssociado = _piloto;
+}
 
+std::string Unidade::getPiloto(){
+    return pilotoAssociado;
+}
 
