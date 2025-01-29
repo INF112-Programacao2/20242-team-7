@@ -6,7 +6,7 @@
 
 class Unidade : public Carta {
     private:
-        int Atk, Def, Hp; 
+        int Atk, Hp; 
         bool Equip;         // Pilotado
         bool Guarda;
         int calor_produzido = 0; // Calor produzido pela unidade, por padrão é 0
@@ -16,10 +16,9 @@ class Unidade : public Carta {
         void setHp(int _hp);
         int getAtk();
         void setAtk(int _atk);
-        int getDef();
         Unidade();
-        Unidade(int Atk, int Def, int Hp, int Custo, std::string Desc, std::string Tipo, std::string Nome, bool Equip, int ID, bool Guarda);
-        Unidade(int Atk, int Def, int Hp, int Custo, std::string Desc, std::string Tipo, std::string Nome, bool Equip, int ID, bool Guarda, int calor_produzido);
+        Unidade(int Atk, int Hp, int Custo, std::string Desc, std::string Tipo, std::string Nome, bool Equip, int ID, bool Guarda);
+        Unidade(int Atk, int Hp, int Custo, std::string Desc, std::string Tipo, std::string Nome, bool Equip, int ID, bool Guarda, int calor_produzido);
         void Atacar(Unidade &Outra);
         void receberDano(int dano);
         bool isEquiped();
