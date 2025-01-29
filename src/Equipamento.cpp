@@ -20,14 +20,14 @@ atkextra(atk_extra),
 guarda(_guarda) {} 
 
 // Método que aplica os efeitos do equipamento a uma unidade e a um jogador
-void Equipamento::fornece_efeito(Unidade unidade, Jogador jogador){
+void Equipamento::fornece_efeito(Unidade* unidade, Jogador jogador){
     // Aumenta o ataque da unidade
-    unidade.setAtk(unidade.getAtk() + atkextra);
+    unidade->setAtk(unidade->getAtk() + atkextra);
     // Aumenta a vida da unidade
-    unidade.setHp(unidade.getHp() + hpextra);
+    unidade->setHp(unidade->getHp() + hpextra);
     // Se o equipamento tiver a habilidade de guarda, ativa a guarda na unidade
     if(guarda){
-        unidade.ativa_guarda();
+        unidade->ativa_guarda();
     }
     // Aumenta o calor do jogador com base no calor extra do equipamento, por padrão é 0
     jogador.setcalor(jogador.getcalor() + calor_extra);

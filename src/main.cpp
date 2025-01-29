@@ -117,9 +117,13 @@ int main() {
                         break;
                     }else{
                         unidade = dynamic_cast<Unidade*>(jogador1.campo[escolha-1]);  // Tenta fazer o cast para Unidade
-                        Piloto* piloto = dynamic_cast<Piloto*>(carta);
-                        unidade -> le();
-                        std::cout << "|\t - Pilotado com sucesso: " << carta->getNome() << std::endl;
+                        if (unidade) {
+                            Piloto* piloto = dynamic_cast<Piloto*>(carta);
+                            unidade->setPiloto(piloto); // Associa o piloto à unidade
+                            piloto->fornece_efeito(jogador1); // Aplica efeitos do piloto
+                            jogador1.joga_carta(indice-1); // Move o piloto para o campo
+                            std::cout << "|\t - " << piloto->getNome() << " pilotando " << unidade->getNome() << std::endl;
+                        }
                     }
                 }
                 //se a carta for um equipamento, ela é equipada em uma unidade
@@ -133,7 +137,7 @@ int main() {
                     unidade = dynamic_cast<Unidade*>(jogador1.campo[escolha-1]);  // Tenta fazer o cast para Unidade
                     Equipamento* equipamento = dynamic_cast<Equipamento*>(carta);
                     unidade -> le();
-                    equipamento->fornece_efeito(*unidade, jogador1);
+                    equipamento->fornece_efeito(unidade, jogador1);
                     unidade->le();
                     std::cout << "|\t - Equipado com sucesso: " << carta->getNome() << std::endl;
                 }
@@ -163,7 +167,7 @@ int main() {
                     unidade = dynamic_cast<Unidade*>(jogador1.campo[escolha-1]);  // Tenta fazer o cast para Unidade
                     Tatica* tatica = dynamic_cast<Tatica*>(carta);
                     unidade -> le();
-                    tatica->fornece_efeito(*unidade, jogador1);
+                    tatica->fornece_efeito(unidade, jogador1);
                     unidade->le();
                     std::cout << "|\t - Efeito da tática fornecido: " << carta->getNome() << std::endl;
                 }

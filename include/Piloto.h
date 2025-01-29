@@ -5,15 +5,18 @@
 #include "../include/Jogador.h"
 #include <cstring>
 
+// Forward declaration
+class Unidade; // Apenas declara que Unidade existe
+
 class Piloto : public Carta{
     private:
     std:: string efeito_piloto;
-    Unidade unidade_tripulada;
+    Unidade* unidade_tripulada;
     public:
-    Piloto(std::string _efeito_piloto, Unidade Unidade, std::string _Desc, std::string _Tipo, std::string _Nome, int _Custo, int _ID );
+    Piloto(std::string _efeito_piloto, Unidade* Unidade, std::string _Desc, std::string _Tipo, std::string _Nome, int _Custo, int _ID );
     ~Piloto();
     void fornece_efeito(Jogador& jog);
-    Unidade getUnidade();
+    Unidade* getUnidade();
     
 };
 

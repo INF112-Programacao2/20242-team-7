@@ -2,10 +2,16 @@
 #define UNIDADE_H
 
 #include "../include/Carta.h"
+#include "../include/Piloto.h"
+
 #include <string>
+
+// Forward declaration
+class Piloto; // Apenas declara que Piloto existe
 
 class Unidade : public Carta {
     private:
+        Piloto* pilotoAssociado;
         int Atk, Def, Hp; 
         bool Equip;         // Pilotado
         bool Guarda;
@@ -20,6 +26,8 @@ class Unidade : public Carta {
         Unidade();
         Unidade(int Atk, int Def, int Hp, int Custo, std::string Desc, std::string Tipo, std::string Nome, bool Equip, int ID, bool Guarda);
         Unidade(int Atk, int Def, int Hp, int Custo, std::string Desc, std::string Tipo, std::string Nome, bool Equip, int ID, bool Guarda, int calor_produzido);
+        void setPiloto(Piloto* piloto);
+        Piloto* getPiloto() const;
         void Atacar(Unidade &Outra);
         void receberDano(int dano);
         bool isEquiped();
