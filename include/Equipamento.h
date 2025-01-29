@@ -1,7 +1,7 @@
 #ifndef EQUIPAMENTO_H
 #define EQUIPAMENTO_H
 
-#include "Tatica.h"
+#include "../include/Tatica.h"
 
 
 class Equipamento : public Tatica{

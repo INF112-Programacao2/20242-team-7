@@ -1,16 +1,16 @@
 #ifndef JOGADOR_H
 #define JOGADOR_H
 
-#include "Carta.h"
-#include "Baralho.h"
-#include "Unidade.h"
+#include "../include/Carta.h"
+#include "../include/Unidade.h"
+#include "../include/Baralho.h"
 
 class Jogador{
 public:
     int vida;
     std::string nome;
-    std::vector<Carta*> mao;
     int qtdCalor;
+    std::vector<Carta*> mao;
     std::vector<Carta*> pilha_descarte;
     std::vector<Carta*> campo;
     bool vezDeJogar;
@@ -22,7 +22,6 @@ public:
     void encerra_turno();
     void descarta(const Carta* carta);
     void verMao();
-    void iniciarMao(Baralho baralho);
     void declara_ataque(Unidade atacante, Unidade defensora);
     int getcalor();
     void setcalor(int _calor);

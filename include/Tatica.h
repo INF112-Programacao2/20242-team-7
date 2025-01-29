@@ -1,8 +1,8 @@
 #ifndef TATICA_H
 #define TATICA_H
 
-#include "Carta.h"
-#include "Unidade.h"
+#include "../include/Carta.h"
+#include "../include/Unidade.h"
 #include <string>
 
 

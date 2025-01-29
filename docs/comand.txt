@@ -1,2 +1,3 @@
 g++ -o Jogo main.cpp Partida.cpp Carta.cpp Baralho.cpp Jogador.cpp Unidade.cpp
 g++ -o Jogo main.cpp Partida.cpp Carta.cpp Baralho.cpp Jogador.cpp Unidade.cpp Equipamento.cpp EquipamentosPredefinidos.cpp Instantaneo.cpp InstantaneoPredefinidas.cpp Piloto.cpp PilotosPredefinidos.cpp Tatica.cpp UnidadesPredefinidas.cpp 
+g++ -o Jogo src/main.cpp src/Partida.cpp src/Carta.cpp src/Baralho.cpp src/Jogador.cpp src/Unidade.cpp src/Equipamento.cpp src/EquipamentosPredefinidos.cpp src/Instantaneo.cpp src/InstantaneoPredefinidas.cpp src/Piloto.cpp src/PilotosPredefinidos.cpp src/Tatica.cpp src/UnidadesPredefinidas.cpp

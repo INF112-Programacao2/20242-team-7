@@ -1,8 +1,8 @@
 #ifndef PARTIDA_H
 #define PARTIDA_H
 
-#include "Jogador.h"
-#include "Baralho.h"
+#include "../include/Jogador.h"
+#include "../include/Baralho.h"
 
 class Partida {
 private:
@@ -22,7 +22,7 @@ public:
 
     bool encerra_partida(bool _fim = false);
 
-    void exibe_historico();
+    //void exibe_historico();
 
     void passa_turno();
     int getTurno();

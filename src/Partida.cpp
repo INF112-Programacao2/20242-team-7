@@ -38,16 +38,16 @@ bool Partida::encerra_partida(bool _fim) {
         return false;
 }
 
-void Partida::exibe_historico() {
+/*void Partida::exibe_historico() {
     std::cout << "Histórico da partida: " << historico << std::endl;
 }
+*/
 
 void Partida::passa_turno() {
     // Troca o turno
     // 0 -> Jogador 1
     // 1 -> Jogador 2
     turno = (turno + 1) % 2;
-    std::cout << "Proximo turno." << std::endl;
 }
 
 int Partida::getTurno() {

@@ -12,82 +12,19 @@
 #include <algorithm>
 #include <random>
 
-using namespace UnidadesPredefinidas;
-using namespace EquipamentosPredefinidos;
-using namespace PilotosPredefinidos;
-using namespace InstanteneoPredefinidos;
-
-
-void inicializaBaralho(Baralho& baralho) {
-    // Adiciona unidades ao baralho
-    baralho.adiciona_carta(new Unidade(RX782Gundam));
-    baralho.adiciona_carta(new Unidade(RX75Guntank));
-    baralho.adiciona_carta(new Unidade(Guncannon));
-    baralho.adiciona_carta(new Unidade(Ball));
-    baralho.adiciona_carta(new Unidade(GM));
-    baralho.adiciona_carta(new Unidade(Zeong));
-    baralho.adiciona_carta(new Unidade(BigZam));
-    baralho.adiciona_carta(new Unidade(Gelgoog));
-    baralho.adiciona_carta(new Unidade(ZGok));
-    baralho.adiciona_carta(new Unidade(Gouf));
-    baralho.adiciona_carta(new Unidade(Zaku));
-
-    // Adiciona equipamentos ao baralho
-    baralho.adiciona_carta(new Equipamento(GundamHammer));
-    baralho.adiciona_carta(new Equipamento(ArmaduraChobam));
-    baralho.adiciona_carta(new Equipamento(UpgradeGundam));
-    baralho.adiciona_carta(new Equipamento(ReatorPartículasMinovsky));
-
-    // Adiciona pilotos ao baralho
-    baralho.adiciona_carta(new Piloto(AmuroRay));
-    baralho.adiciona_carta(new Piloto(KayShiden));
-    baralho.adiciona_carta(new Piloto(HayatoKobayashi));
-    baralho.adiciona_carta(new Piloto(PilotoFederacao));
-    baralho.adiciona_carta(new Piloto(CharAznable));
-    baralho.adiciona_carta(new Piloto(DozleZabi));
-    baralho.adiciona_carta(new Piloto(RambaRal));
-    baralho.adiciona_carta(new Piloto(PilotoZeon));
-
-    // Adiciona instantâneos ao baralho
-    baralho.adiciona_carta(new Instantaneo(SistemaRaioSolar));
-    baralho.adiciona_carta(new Instantaneo(ReforcosDaFederacao));
-    baralho.adiciona_carta(new Instantaneo(OperacaoBritanica));
-    baralho.adiciona_carta(new Instantaneo(NovaInvestida));
-    baralho.adiciona_carta(new Instantaneo(INEUZaku));
-    baralho.adiciona_carta(new Instantaneo(DesengajarCombate));
-    baralho.adiciona_carta(new Instantaneo(CINADSN));
-    baralho.adiciona_carta(new Instantaneo(ADCV));
-}
-
-void iniciarMao(Jogador& jogador, Baralho& baralho) {
-    // Embaralha o baralho
+void iniciarMao(Jogador &jogador, Baralho &baralho, int qtd) {
     std::random_device rd;
     std::mt19937 g(rd());
     std::shuffle(baralho.cartas.begin(), baralho.cartas.end(), g);
-
-    int unidades = 0, equipamentos = 0, pilotos = 0, instantaneos = 0;
-    for (Carta* carta : baralho.cartas) {
-        if (unidades < 4 && dynamic_cast<Unidade*>(carta)) {
-            jogador.compra_carta(carta);
-            unidades++;
-        } else if (equipamentos < 2 && dynamic_cast<Equipamento*>(carta)) {
-            jogador.compra_carta(carta);
-            equipamentos++;
-        } else if (pilotos < 4 && dynamic_cast<Piloto*>(carta)) {
-            jogador.compra_carta(carta);
-            pilotos++;
-        } else if (instantaneos < 2 && dynamic_cast<Instantaneo*>(carta)) {
-            jogador.compra_carta(carta);
-            instantaneos++;
-        }
-        if (jogador.getMao().size() == 12) break;
+    for (int i = 0; i < qtd && qtd <= baralho.quantidade_cartas(); ++i) {
+        Carta* carta = baralho.seleciona_carta(i);
+        jogador.compra_carta(carta);
     }
 }
 
 int main() {
     // Cria um baralho com algumas cartas
     Baralho baralho;
-    inicializaBaralho(baralho);
     //cabeçalho
     std::cout << 
     "| ----------------------------- Burning Steel Strife ---------------------------- \n" <<
@@ -113,10 +50,10 @@ int main() {
     int indice;
 
     // Jogador 1 compra 12 cartas do baralho, sendo 4 unidades, 2 equipamentos, 4 pilotos e 2 instantâneos
-    iniciarMao(jogador1, baralho);
+    iniciarMao(jogador1, baralho, 12);
 
     // Jogador 2 compra 12 cartas do baralho, sendo 4 unidades, 2 equipamentos, 4 pilotos e 2 instantâneos
-    iniciarMao(jogador2, baralho);
+    iniciarMao(jogador2, baralho, 12);
 
     // Cria uma partida com os dois jogadores
     Partida partida(jogador1.getNome(), jogador2.getNome());
@@ -125,14 +62,23 @@ int main() {
     // Simula a partida
     while (!partida.encerra_partida(false)) {
 
-        std::cout << "Rodada: " << partida.rodada << std::endl;
+        std::cout << "|\n| - " <<"Rodada: " << partida.rodada << std::endl;
         
-        std::cout << "Turno do " << (partida.getTurno() == 0 ? "Jogador 1" : "Jogador 2") << std::endl;
+        std::cout << "|\n| - " <<"Turno do " << (partida.getTurno() == 0 ? "Jogador 1" : "Jogador 2") << std::endl;
         if (partida.getTurno() == 0) {
-            std::cout << "Mao Jogador: " << jogador1.getNome() << std::endl;
+            std::cout << "|\n| - " <<"Mao Jogador: " << jogador1.getNome() << std::endl;
             jogador1.verMao();
 
-            std::cout << "1 - Jogar Carta\n2 - Atacar\n3 - \n4 - Encerrar Partida\n5 - Exibir Historico\n6 - Passar Turno\n7 - Sair\n";
+            std::cout << 
+            "|\n| - 1 - Jogar Carta\n"
+            "| - 2 - Atacar\n"
+            "| - 3 - \n"
+            "| - 4 - Encerrar Partida\n"
+            "| - 5 - Exibir Historico\n"
+            "| - 6 - Passar Turno\n"
+            "| - 7 - Sair\n"
+            "| » ";
+            
             int opcao;
             std::cin >> opcao;
 
@@ -144,14 +90,14 @@ int main() {
             switch (opcao)
             {
             case 1:
-                std::cout << "Digite o numero da carta: ";
+                std::cout << "|\n| - " <<"Digite o numero da carta: ";
                 std::cin >> indice;
 
                 jogador1.joga_carta(indice-1);
                 break;
             case 2:
 
-                std::cout << "Atacar\nDigite qual carta deseja usar para atacar";
+                std::cout << "|\n| - " <<"Atacar\n| - Digite qual carta deseja usar para atacar";
                 jogador1.verCampo();
                 int escolha;
                 std::cin>>escolha;
@@ -159,14 +105,14 @@ int main() {
 
 
                 if (escolha < 1 || escolha > jogador1.campo.size()) {
-                    std::cout << "Escolha invalida! Selecione uma posicao valida." << " escolha : " << escolha << " posicao : " << jogador1.campo.size() << std::endl;
+                    std::cout << "|\n| - " <<"Escolha invalida! Selecione uma posicao valida." << " escolha : " << escolha << " posicao : " << jogador1.campo.size() << std::endl;
                     break;
                 }
 
                  carta = jogador1.campo[escolha-1];  // Obtém o objeto Carta
             
                  if (carta == nullptr) {
-                    std::cout << "Nenhuma carta encontrada na posição escolhida!" << std::endl;
+                    std::cout << "|\n| - " <<"Nenhuma carta encontrada na posição escolhida!" << std::endl;
                     break;
                 }
 
@@ -196,7 +142,7 @@ int main() {
                 }
                 else {
                     // Se o cast falhar, significa que a Carta não é do tipo Unidade
-                    std::cout << "A carta não é do tipo Unidade!" << std::endl;
+                    std::cout << "|\n| - " <<"A carta não é do tipo Unidade!" << std::endl;
                 }
 
                 break;
@@ -206,17 +152,19 @@ int main() {
                 partida.encerra_partida(true);
                 break;
             case 5:
+            /*
                 partida.exibe_historico();
+            */
                 break;
             case 6:
                 partida.passa_turno();
                 break;
             case 7:
-                std::cout << "Saindo\n";
+                std::cout << "|\n| - " <<"Saindo\n";
                 partida.encerra_partida(true);
                 break;
             default:
-                std::cout << "Opcao invalida\n";
+                std::cout << "|\n| - " <<"Opcao invalida\n";
                 break;
             }
         } else if (partida.getTurno() == 1) {
@@ -226,24 +174,33 @@ int main() {
             Carta* cartainimigo = nullptr;
             Unidade* unidadeinimigo = nullptr;
 
-            std::cout << "Mao Jogador: " << jogador2.getNome() << std::endl;
+            std::cout << "|\n| - " <<"Mao Jogador: " << jogador2.getNome() << std::endl;
             jogador2.verMao();
         
-            std::cout << "1 - Jogar Carta\n2 - Atacar\n3 - \n4 - Encerrar Partida\n5 - Exibir Historico\n6 - Passar Turno\n7 - Sair\n";
+            std::cout << 
+            "|\n| - 1 - Jogar Carta\n"
+            "| - 2 - Atacar\n"
+            "| - 3 - \n"
+            "| - 4 - Encerrar Partida\n"
+            "| - 5 - Exibir Historico\n"
+            "| - 6 - Passar Turno\n"
+            "| - 7 - Sair\n"
+            "| » ";
+            
             int opcao;
             std::cin >> opcao;
 
             switch (opcao)
             {
             case 1:
-                std::cout << "Digite o numero da carta: ";
+                std::cout << "|\n| - " <<"Digite o numero da carta: ";
                 std::cin >> indice;
                 //jogador1.joga_carta(indice-1); //duplicado
                 jogador2.joga_carta(indice-1);
                 break;
             case 2:
 
-                std::cout << "Atacar\nDigite qual carta deseja usar para atacar";
+                std::cout << "|\n| - " <<"Atacar\n| - Digite qual carta deseja usar para atacar";
                 jogador2.verCampo();
                 int escolha;
                 std::cin>>escolha;
@@ -251,14 +208,14 @@ int main() {
 
 
                 if (escolha < 1 || escolha > jogador2.campo.size()) {
-                    std::cout << "Escolha invalida! Selecione uma posicao valida." << " escolha : " << escolha << " posicao : " << jogador2.campo.size() << std::endl;
+                    std::cout << "|\n| - " <<"Escolha invalida! Selecione uma posicao valida." << " escolha : " << escolha << " posicao : " << jogador2.campo.size() << std::endl;
                     break;
                 }
 
                  carta = jogador2.campo[escolha-1];  // Obtém o objeto Carta
             
                  if (carta == nullptr) {
-                    std::cout << "Nenhuma carta encontrada na posição escolhida!" << std::endl;
+                    std::cout << "|\n| - " <<"Nenhuma carta encontrada na posição escolhida!" << std::endl;
                     break;
                 }
 
@@ -288,7 +245,7 @@ int main() {
                 } 
                 else {
                     // Se o cast falhar, significa que a Carta não é do tipo Unidade
-                    std::cout << "A carta não é do tipo Unidade!" << std::endl;
+                    std::cout << "|\n| - " <<"A carta não é do tipo Unidade!" << std::endl;
                 }
                 
                 break;
@@ -298,27 +255,27 @@ int main() {
                 partida.encerra_partida(true);
                 break;
             case 5:
+            /*
                 partida.exibe_historico();
+            */
                 break;
             case 6:
                 partida.passa_turno();
                 break;
             case 7:
-                std::cout << "Saindo\n";
+                std::cout << "|\n| - " <<"Saindo\n";
                 partida.encerra_partida(true);
                 break;
             default:
-                std::cout << "Opcao invalida\n";
+                std::cout << "|\n| - " <<"Opcao invalida\n";
                 break;
             }
         }
 
-        // Passa o turno
-        partida.passa_turno();
     }
-
+/*
     // Exibe o histórico da partida
     partida.exibe_historico();
-
+*/
     return 0;
 }

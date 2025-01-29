@@ -1,7 +1,7 @@
 #ifndef INSTANTANEO_H
 #define INSTANTANEO_H
 
-#include "Tatica.h"
+#include "../include/Tatica.h"
 class Jogador;
 class Unidade;
 

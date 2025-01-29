@@ -1,8 +1,8 @@
 #ifndef PILOTO_H
 #define PILOTO_H
-#include "Carta.h"
-#include "Unidade.h"
-#include "Jogador.h"
+#include "../include/Carta.h"
+#include "../include/Unidade.h"
+#include "../include/Jogador.h"
 #include <cstring>
 
 class Piloto : public Carta{
