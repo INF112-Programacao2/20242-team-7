@@ -20,7 +20,7 @@ atkextra(atk_extra),
 guarda(_guarda) {} 
 
 // Método que aplica os efeitos do equipamento a uma unidade e a um jogador
-void Equipamento::fornece_efeito(Unidade& unidade, Jogador& jogador){
+void Equipamento::fornece_efeito(Unidade unidade, Jogador jogador){
     // Aumenta o ataque da unidade
     unidade.setAtk(unidade.getAtk() + atkextra);
     // Aumenta a vida da unidade
@@ -31,8 +31,4 @@ void Equipamento::fornece_efeito(Unidade& unidade, Jogador& jogador){
     }
     // Aumenta o calor do jogador com base no calor extra do equipamento, por padrão é 0
     jogador.setcalor(jogador.getcalor() + calor_extra);
-}
-
-void Equipamento::leequipamento(){
-    std::cout<<"Ataque extra : "<<atkextra<<std::endl<<"Vida extra : "<<hpextra<<std::endl;
 }
