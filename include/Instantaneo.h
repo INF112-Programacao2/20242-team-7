@@ -7,7 +7,7 @@ class Unidade;
 
 class Instantaneo : public Tatica{
     public:
-        void fornece_efeito (Jogador jogador, Jogador inimigo);
+        void fornece_efeito (Jogador& jogador, Jogador& inimigo);
         // Construtor padrão
         Instantaneo();
         Instantaneo(std::string _Desc, std::string _Tipo, std::string _Nome, int _Custo, int _ID);

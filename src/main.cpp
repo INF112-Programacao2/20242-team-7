@@ -260,6 +260,10 @@ int main() {
                         std::cout<<"HP Antes: "<<unidadeinimigo->getHp()<<std::endl;
                         unidade->Atacar(*unidadeinimigo);
                         std::cout<<"HP Depois: "<<unidadeinimigo->getHp()<<std::endl;
+                        if(unidadeinimigo->getHp()<=0){
+                            std::cout<<"A carta inimiga foi destruída!"<<std::endl;
+                            jogador2.campo.erase(jogador2.campo.begin() + escolha-1);
+                        }
                     }    
                 }
                 else {
@@ -470,6 +474,10 @@ int main() {
                         std::cout<<"HP Antes: "<<unidadeinimigo->getHp()<<std::endl;
                         unidade->Atacar(*unidadeinimigo);
                         std::cout<<"HP Depois: "<<unidadeinimigo->getHp()<<std::endl;
+                        if(unidadeinimigo->getHp()<=0){
+                            std::cout<<"A carta inimiga foi destruída!"<<std::endl;
+                            jogador1.campo.erase(jogador1.campo.begin() + escolha-1);
+                        }
                     }   
                 } 
                 else {
