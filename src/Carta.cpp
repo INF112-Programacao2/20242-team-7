@@ -22,6 +22,13 @@ std::string Carta::getDesc(){
     return Descricao; //Retorna a descrição
 }
 
+void Carta::le() {
+    std::cout << "| \t* Nome: " << Nome << std::endl; //Imprime o nome
+    std::cout << "| \t* Tipo: " << Tipo << std::endl; //Imprime o tipo
+    std::cout << "| \t* Custo: " << Custo << std::endl; //Imprime o custo
+    std::cout << "| \t* Descricao: " << Descricao << std::endl; //Imprime a descrição
+}
+
 //Construtor:
 Carta::Carta(std::string _Desc, std::string _Tipo, std::string _Nome, int _Custo, int _ID)
     : Descricao(_Desc), Tipo(_Tipo), Nome(_Nome), Custo(_Custo), ID(_ID) {}

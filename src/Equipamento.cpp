@@ -36,3 +36,11 @@ void Equipamento::fornece_efeito(Unidade& unidade, Jogador& jogador){
 void Equipamento::leequipamento(){
     std::cout<<"Ataque extra : "<<atkextra<<std::endl<<"Vida extra : "<<hpextra<<std::endl;
 }
+
+void Equipamento::le(){
+    // Chama a função le() da classe base para imprimir os atributos comuns
+    Carta::le();
+    // Adiciona a impressão dos atributos específicos de Equipamento
+    std::cout << "| \t* Ataque extra: " << atkextra << std::endl;
+    std::cout << "| \t* Vida extra: " << hpextra << std::endl;
+}

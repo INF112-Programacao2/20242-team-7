@@ -43,12 +43,12 @@ void Unidade::setHp(int _hp){
 }
 
 void Unidade::le(){
-    std::cout << "| \t* Ataque : " << Atk << std::endl 
+    std::cout << "| \t* Nome : " << Nome << std::endl
+              << "| \t* Piloto: " << pilotoAssociado <<std::endl
+              << "| \t* Ataque : " << Atk << std::endl
               << "| \t* HP : "<< Hp << std::endl 
-              << "| \t* Descricao :" << Descricao << std::endl
               << "| \t* Tipo :" << Tipo <<std::endl
-              << "| \t* Nome : " << Nome << std::endl
-              << "| \t* Piloto: " << pilotoAssociado <<std::endl;
+              << "| \t* Descricao :" << Descricao << std::endl;
 }
 
 void Unidade::setAtk(int _Atk) {

@@ -19,6 +19,8 @@ public:
 
     Carta* seleciona_carta(int qtd);
 
+    void imprime_cartas();
+
     void adiciona_carta(Carta* carta);
 
     int quantidade_cartas();

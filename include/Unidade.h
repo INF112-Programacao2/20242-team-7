@@ -22,7 +22,6 @@ class Unidade : public Carta {
         void Atacar(Unidade &Outra);
         void receberDano(int dano);
         bool isEquiped();
-        void recebe_efeito();
         void le();
         void ativa_guarda();
         void ativaEvasao();
