@@ -18,6 +18,10 @@ std::string Carta::getNome(){
     return Nome; //Retorna o nome
 }
 
+std::string Carta::getDesc(){
+    return Descricao; //Retorna a descrição
+}
+
 //Construtor:
 Carta::Carta(std::string _Desc, std::string _Tipo, std::string _Nome, int _Custo, int _ID)
     : Descricao(_Desc), Tipo(_Tipo), Nome(_Nome), Custo(_Custo), ID(_ID) {}
@@ -42,6 +46,6 @@ void Carta::setCusto(int custo){ //Custo
 
 bool Carta::operator==(const Carta& other) const {
         // Implementação da comparação
-        return this->ID == other.ID; // Exemplo de comparação
+        return this->ID == other.ID; //Compara o ID da carta
     }
 

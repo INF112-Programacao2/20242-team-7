@@ -12,13 +12,30 @@
 #include <algorithm>
 #include <random>
 
-void iniciarMao(Jogador &jogador, Baralho &baralho, int qtd) {
+void iniciarMao(Jogador& jogador, Baralho& baralho) {
+    // Embaralha o baralho
     std::random_device rd;
     std::mt19937 g(rd());
     std::shuffle(baralho.cartas.begin(), baralho.cartas.end(), g);
-    for (int i = 0; i < qtd && qtd <= baralho.quantidade_cartas(); ++i) {
-        Carta* carta = baralho.seleciona_carta(i);
-        jogador.compra_carta(carta);
+
+
+
+    int unidades = 0, equipamentos = 0, pilotos = 0, instantaneos = 0;
+    for (Carta* carta : baralho.cartas) {
+        if (unidades < 4 && dynamic_cast<Unidade*>(carta)) {
+            jogador.compra_carta(carta);
+            unidades++;
+        } else if (equipamentos < 2 && dynamic_cast<Equipamento*>(carta)) {
+            jogador.compra_carta(carta);
+            equipamentos++;
+        } else if (pilotos < 4 && dynamic_cast<Piloto*>(carta)) {
+            jogador.compra_carta(carta);
+            pilotos++;
+        } else if (instantaneos < 2 && dynamic_cast<Instantaneo*>(carta)) {
+            jogador.compra_carta(carta);
+            instantaneos++;
+        }
+        if (jogador.getMao().size() == 12) break;
     }
 }
 
@@ -51,10 +68,10 @@ int main() {
     int indice;
 
     // Jogador 1 compra 12 cartas do baralho, sendo 4 unidades, 2 equipamentos, 4 pilotos e 2 instantâneos
-    iniciarMao(jogador1, baralho, 12);
+    iniciarMao(jogador1, baralho);
 
     // Jogador 2 compra 12 cartas do baralho, sendo 4 unidades, 2 equipamentos, 4 pilotos e 2 instantâneos
-    iniciarMao(jogador2, baralho, 12);
+    iniciarMao(jogador2, baralho);
 
     // Cria uma partida com os dois jogadores
     Partida partida(jogador1.getNome(), jogador2.getNome());
@@ -66,6 +83,7 @@ int main() {
         std::cout << "|\n| - " <<"Rodada: " << partida.rodada << std::endl;
         
         std::cout << "|\n| - " <<"Turno do " << (partida.getTurno() == 0 ? "Jogador 1" : "Jogador 2") << std::endl;
+        //turno do jogador 1
         if (partida.getTurno() == 0) {
             std::cout << "|\n| - " <<"Mao Jogador: " << jogador1.getNome() << std::endl;
             jogador1.verMao();
@@ -75,7 +93,7 @@ int main() {
             std::cout << 
             "|\n| - 1 - Jogar Carta\n"
             "| - 2 - Atacar\n"
-            "| - 3 - \n"
+            "| - 3 - Ver cartas baralho\n"
             "| - 4 - Encerrar Partida\n"
             "| - 5 - Exibir Historico\n"
             "| - 6 - Passar Turno\n"
@@ -92,10 +110,10 @@ int main() {
 
             switch (opcao)
             {
+            //Jogar carta
             case 1:
                 std::cout << "|\n| - " <<"Digite o numero da carta: ";
                 std::cin >> indice;
-
 
                 carta = jogador1.mao[indice-1];  // Obtém o objeto Carta
                 if(jogador1.getcalor()<carta->getCusto()){
@@ -112,34 +130,32 @@ int main() {
                 }
                 //se a carta for um piloto, ela é colocada em uma unidade
                 else if (dynamic_cast<Piloto*>(carta)) {
-                    int escolha;
 
                     std::cout << "|\n| - " <<"Pilotar\n| - Digite qual carta deseja pilotar"
                         "\n| - Para deixar piloto em campo, digite 0" << std::endl;
                     
                     jogador1.verCampo();
                     std::cout << "|\n » ";
+                    int escolha;
                     std::cin>>escolha;
 
-                    if(escolha == 0){
-                        jogador1.joga_carta(indice-1);
-                        carta->gasta_calor(carta->getCusto(), jogador1);//Debita o custo da carta do calor do jogador
-                        std::cout << "|\t - Carta jogada no campo: " << carta->getNome() << std::endl;
-                        break;
-                    }else{
-                        unidade = dynamic_cast<Unidade*>(jogador1.campo[escolha-1]);  // Tenta fazer o cast para Unidade
-                        Piloto* piloto = dynamic_cast<Piloto*>(carta);
-                        unidade->setPiloto(piloto->getNome());
-                        std::cout << "|\t - Pilotado com sucesso: " << piloto -> getNome() << std::endl;
-                        unidade -> le();
-                        carta->gasta_calor(carta->getCusto(), jogador1);//Debita o custo da carta do calor do jogador
-                    }
+                    unidade = dynamic_cast<Unidade*>(jogador1.campo[escolha-1]);  // Tenta fazer o cast para Unidade
+                    Piloto* piloto = dynamic_cast<Piloto*>(carta);
+                    unidade->setPiloto(piloto->getNome()); //Coloca o piloto na unidade
+                    piloto -> setUnidade(*unidade); //Atribui a unidade ao piloto
+                    std::cout << "|\t - Piloto associado a unidade: " << piloto -> getNome() << std::endl;
+
+                    piloto -> fornece_efeito(jogador1);
+
+                    std::cout << "|\t - Pilotado com sucesso: " << piloto -> getNome() << std::endl;
+                    unidade -> le();
+                    carta->gasta_calor(carta->getCusto(), jogador1);//Debita o custo da carta do calor do jogador
+                    
                 }
                 //se a carta for um equipamento, ela é equipada em uma unidade
                 else if (dynamic_cast<Equipamento*>(carta)) {
-                    int escolha;
-
                     std::cout << "|\n| - " <<"Equipar\n| - Digite a qual carta deseja fornecer equipamento";
+                    int escolha;
                     jogador1.verCampo();
                     std::cin>>escolha;
 

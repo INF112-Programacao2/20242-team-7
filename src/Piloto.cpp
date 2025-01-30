@@ -14,13 +14,9 @@ Piloto :: Piloto(std::string _efeito_piloto, Unidade _unidade_tripulada, std::st
     efeito_piloto(_efeito_piloto){ //Efeito do piloto
     }
 
-Piloto::~Piloto(){
-        //Nada no destrutor, sem alocação dinâmica
-    }
+Piloto::~Piloto(){}//Nada no destrutor, sem alocação dinâmica
 
-Unidade Piloto::getUnidade(){
-    return unidade_tripulada;
-}
+/*ACOES*/
 
 void Piloto::fornece_efeito(Jogador& jog) {
     Jogador jogador = jog;
@@ -172,6 +168,25 @@ void Piloto::fornece_efeito(Jogador& jog) {
         default:
             break;
         } }
+
+void Piloto::le(){
+    std::cout << "| \t* Nome: "<< getNome() <<std::endl; //Imprime o nome
+    std::cout << "| \t* Tipo: "<< getTipo() <<std::endl; //Imprime o tipo
+    std::cout << "| \t* Descrição: "<< getDesc() <<std::endl; //Imprime a descrição
+    std::cout << "| \t* Custo: "<< getCusto() <<std::endl; //Imprime o custo
+    std::cout << "| \t* ID: "<< getID() <<std::endl; //Imprime o ID
+    std::cout << "| \t* Efeito: "<< efeito_piloto <<std::endl; //Imprime o efeito
+    std::cout << "| \t* Unidade Tripulada: "<< unidade_tripulada.getNome() <<std::endl; //Imprime a unidade tripulada
+}
+
+/*GETTERS E SETTERS*/
+void Piloto::setUnidade(Unidade _unidade){
+    unidade_tripulada = _unidade;
+}
+
+Unidade Piloto::getUnidade(){
+    return unidade_tripulada;
+}
 
 
     
