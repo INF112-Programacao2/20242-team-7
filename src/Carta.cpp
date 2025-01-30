@@ -22,9 +22,16 @@ std::string Carta::getDesc(){
     return Descricao; //Retorna a descrição
 }
 
+bool Carta::getEquipavel(){
+    return equipavel; //Retorna falso, pois a carta não é um equipamento
+}
+
 //Construtor:
 Carta::Carta(std::string _Desc, std::string _Tipo, std::string _Nome, int _Custo, int _ID)
     : Descricao(_Desc), Tipo(_Tipo), Nome(_Nome), Custo(_Custo), ID(_ID) {}
+
+Carta::Carta(std::string _Desc, std::string _Tipo, std::string _Nome, int _Custo, int _ID, bool _Equip)
+    : Descricao(_Desc), Tipo(_Tipo), Nome(_Nome), Custo(_Custo), ID(_ID), equipavel(_Equip) {}
 
 //Destrutor:
 Carta::~Carta() {} 

@@ -48,7 +48,7 @@ void Jogador::verMao() {
 void Jogador::verCampo() {
     for (int i = 0; i < campo.size(); ++i) {
         Carta* carta = campo[i];
-        std::cout << "\t[" << i+1 << "] " << carta->getNome() << " " << carta->getTipo() <<  std::endl;
+        std::cout << "\t[" << i+1 << "] " << carta->getNome() << " " << carta->getTipo() << (carta->getEquipavel() == 0 ? " - Vazio" : " - Tripulada") <<  std::endl;
     }
     std::cout << std::endl;
 }

@@ -9,13 +9,13 @@ int Unidade::getAtk(){
 }
 
 Unidade::Unidade()
-    : Carta("", "", "", 0, 0), Atk(0), Hp(0), Equip(false), Guarda(false), Evasao(false) {}
+    : Carta("", "", "", 0, 0, false), Atk(0), Hp(0), Equip(false), Guarda(false), Evasao(false) {}
 
 Unidade::Unidade(int _Atk, int _Hp, int _Custo, std::string _Desc, std::string _Tipo, std::string _Nome, bool _Equip, int _ID, bool _guarda)
-    : Carta(_Desc, _Tipo, _Nome, _Custo, _ID), Atk(_Atk), Hp(_Hp), Equip(_Equip), Guarda(_guarda), Evasao(false)  {}
+    : Carta(_Desc, _Tipo, _Nome, _Custo, _ID, _Equip), Atk(_Atk), Hp(_Hp), Equip(_Equip), Guarda(_guarda), Evasao(false)  {}
 
 Unidade::Unidade(int _Atk, int _Hp, int _Custo, std::string _Desc, std::string _Tipo, std::string _Nome, bool _Equip, int _ID, bool _guarda, int _calor_produzido)
-    : Carta(_Desc, _Tipo, _Nome, _Custo, _ID),
+    : Carta(_Desc, _Tipo, _Nome, _Custo, _ID, _Equip),
     Atk(_Atk),
     Hp(_Hp),
     Equip(_Equip),
@@ -35,7 +35,7 @@ void Unidade::Atacar(Unidade &Outra){
 }
 
 bool Unidade::isEquiped(){
-    return Equip;
+    return getEquipavel();
 }
 
 void Unidade::setHp(int _hp){
@@ -68,10 +68,15 @@ void Unidade::ativaEvasao(){
 }
 
 void Unidade::setPiloto(std::string _piloto){
+    Equip = true;
     pilotoAssociado = _piloto;
 }
 
 std::string Unidade::getPiloto(){
     return pilotoAssociado;
+}
+
+void Unidade::setEquipavel(bool equipavel){
+    Equip = equipavel;
 }
 

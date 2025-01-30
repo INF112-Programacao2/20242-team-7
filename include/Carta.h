@@ -13,6 +13,7 @@ class Carta {
 protected:
     std::string Descricao, Tipo, Nome;
     int ID, Custo;
+    bool equipavel = false;
 
 public:
     // Métodos de acesso 
@@ -21,6 +22,7 @@ public:
     virtual std::string getTipo();
     virtual std::string getNome();
     virtual std::string getDesc();
+    virtual bool getEquipavel();
     virtual void gasta_calor(int custo, Jogador &jogador);
     virtual void gera_calor(int qtd, Jogador &jogador);
     virtual void fornece_efeito();
@@ -31,6 +33,7 @@ public:
 
     // Construtor e destrutor
     Carta(std::string _Desc, std::string _Tipo, std::string _Nome, int _Custo, int _ID);
+    Carta(std::string _Desc, std::string _Tipo, std::string _Nome, int _Custo, int _ID, bool _Equip);
     virtual ~Carta() = 0; // Tornando a classe abstrata com destrutor puro virtual
 };
 
