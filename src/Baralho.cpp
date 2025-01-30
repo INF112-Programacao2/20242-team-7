@@ -21,6 +21,13 @@ int Baralho::quantidade_cartas() {
     return cartas.size();
 }
 
+void Baralho::verBaralho() {
+    for (Carta* carta : cartas) {
+        carta->le();
+        std::cout << std::endl;
+    }
+}
+
 Baralho::Baralho() {
     inicializaBaralho(*this);
 }

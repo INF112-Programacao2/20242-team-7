@@ -45,9 +45,9 @@ void Piloto::fornece_efeito(Jogador& jog) {
 
         case 3: // Hayato
             try {
-                std::cout << "Deseja gastar 2 pontos de calor e converter a unidade pilotada por Hayato Kobayashi em uma RX-75 GUNTANK?" << std::endl;
-                std::cout << "0 - Não" << std::endl;
-                std::cout << "1 - Sim" << std::endl;
+                std::cout << "|\t - Deseja gastar 2 pontos de calor e converter a unidade pilotada por Hayato Kobayashi em uma RX-75 GUNTANK?" << std::endl;
+                std::cout << "|\t - 0 - Não" << std::endl;
+                std::cout << "|\t - 1 - Sim" << std::endl;
 
                 std::cin >> decide;
                 if (std::cin.fail()) {
@@ -56,7 +56,7 @@ void Piloto::fornece_efeito(Jogador& jog) {
                     break;
                 } else if (decide == 1) {
                     if(jog.getcalor()<2){
-                        std::cout<<"Voce nao possui calor suficiente para essa acao"<<std::endl;
+                        std::cout << "|\t - Voce nao possui calor suficiente para essa acao"<<std::endl;
                     }
                     else{
                         jog.setcalor(jog.getcalor()-2); //Gasta 2 calor
@@ -116,30 +116,30 @@ void Piloto::fornece_efeito(Jogador& jog) {
             break;
 
         case 6:// Dozle Zabi
-            std::cout<<"Se a sua unidade tripulada for do tipo heroi, voce pode gastar 2 de calor, e receber +15 pontos de ATK" <<std::endl;
+            std::cout << "|\t - Se a sua unidade tripulada for do tipo heroi, voce pode gastar 2 de calor, e receber +15 pontos de ATK" <<std::endl;
             if(unidade_tripulada.getTipo()=="Heroi"){
-                std::cout<<"Selecione uma opcao;\n 0-Nao\n 1-Sim\n";
+                std::cout << "|\t - Selecione uma opcao;\n 0-Nao\n|\t - 1-Sim\n";
                 std::cin>>decide;
                 if(decide==1 &&jog.getcalor()>=1){
                      jog.setcalor(jog.getcalor()-1); //Gasta  calor
                         unidade_tripulada.setAtk(unidade_tripulada.getAtk()+15); //Sobe o atk em 15 pontos
                 }
                 if(decide==0 || jog.getcalor()<1){
-                    std::cout<<"A acao nao sera realizada por escolha do jogador, ou porque o mesmo nao possui calor suficiente. " <<std::endl;
+                    std::cout << "|\t - A acao nao sera realizada por escolha do jogador, ou porque o mesmo nao possui calor suficiente. " <<std::endl;
                     break;
                 }}
             break;
 
         case 7: //Ramba Ral
-            std::cout <<"Deseja gastar 2 de calor, para receber evasao?"<<std::endl;
-            std::cout<<" 0-Nao\n 1-Sim\n"<<std::endl;
+            std::cout << "|\t - Deseja gastar 2 de calor, para receber evasao?"<<std::endl;
+            std::cout << "|\t - 0-Nao\n|\t - 1-Sim\n"<<std::endl;
             std::cin>>decide;
             if(decide==1 && jog.getcalor()>=2){
                 jog.setcalor(jog.getcalor()-2);
                 unidade_tripulada.ativaEvasao();
             }
             else{
-                std::cout<<"A acao nao sera realizada por escolha do jogador, ou porque o mesmo nao possui calor suficiente. " <<std::endl;
+                std::cout << "|\t - A acao nao sera realizada por escolha do jogador, ou porque o mesmo nao possui calor suficiente. " <<std::endl;
                 break;
             }
             break;

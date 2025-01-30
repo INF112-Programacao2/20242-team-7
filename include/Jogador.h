@@ -18,6 +18,7 @@ public:
     Jogador(int _vida, std::string _nome, int _qtdCalor, std::vector<Carta*> _mao, bool _vezDeJogar);
     void compra_carta(Carta* carta);
     void joga_carta(int ID);
+    void atribuiCarta(int ID);
     void declara_efeito(Carta* c);
     void descarta(const Carta* carta);
     void declara_ataque(Unidade atacante, Unidade defensora);

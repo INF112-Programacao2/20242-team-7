@@ -1,5 +1,6 @@
 #include "../include/Carta.h"
 #include "../include/Jogador.h"
+#include <iomanip>
 
 //Métodos de acesso:
 int Carta::getID() {
@@ -22,8 +23,25 @@ std::string Carta::getDesc(){
     return Descricao; //Retorna a descrição
 }
 
+void Carta::le() {
+    std::cout << "| \t* Nome: " << Nome << std::endl; //Imprime o nome
+    std::cout << "| \t* Tipo: " << Tipo << std::endl; //Imprime o tipo
+    std::cout << "| \t* Custo: " << Custo << std::endl; //Imprime o custo
+    std::cout << "| \t* Descricao: " << Descricao << std::endl; //Imprime a descrição
+}
+
+void Carta::infoBasica(){
+    std::cout << "\t* Nome: " << std::setw(20) << std::left << Nome 
+              << "\t* Tipo: " << std::setw(15) << std::left << Tipo 
+              << "\t* Custo: " << Custo << std::endl;
+}
+
+void Carta::setEquipavel(bool equip){
+    equipavel = equip; //Seta o valor de equipavel
+}
+
 bool Carta::getEquipavel(){
-    return equipavel; //Retorna falso, pois a carta não é um equipamento
+    return equipavel; 
 }
 
 //Construtor:

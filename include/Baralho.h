@@ -19,6 +19,8 @@ public:
 
     Carta* seleciona_carta(int qtd);
 
+    void verBaralho();
+
     void adiciona_carta(Carta* carta);
 
     int quantidade_cartas();
