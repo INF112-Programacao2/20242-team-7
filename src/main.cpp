@@ -157,7 +157,6 @@ int main() {
                 else if (dynamic_cast<Equipamento*>(carta)) {
                     int escolha;
                     std::cout << "|\n| - " <<"Equipar\n| - Digite a qual carta deseja fornecer equipamento";
-                    int escolha;
                     jogador1.verCampo();
                     std::cin>>escolha;
 
