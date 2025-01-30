@@ -89,6 +89,7 @@ int main() {
             Unidade* unidade = nullptr;
             Carta* cartainimigo = nullptr;
             Unidade* unidadeinimigo = nullptr;
+            Equipamento* equipamento = nullptr;
 
             switch (opcao)
             {
@@ -138,20 +139,18 @@ int main() {
                 //se a carta for um equipamento, ela é equipada em uma unidade
                 else if (dynamic_cast<Equipamento*>(carta)) {
                     int escolha;
-
                     std::cout << "|\n| - " <<"Equipar\n| - Digite a qual carta deseja fornecer equipamento";
                     jogador1.verCampo();
                     std::cin>>escolha;
 
                     unidade = dynamic_cast<Unidade*>(jogador1.campo[escolha-1]);  // Tenta fazer o cast para Unidade
-                    Equipamento* equipamento = dynamic_cast<Equipamento*>(carta);
-                    
+                    equipamento = dynamic_cast<Equipamento*>(carta);
                     equipamento->fornece_efeito(*unidade, jogador1);
                     unidade->le();
                     std::cout << "|\t - Equipado com sucesso: " << carta->getNome() << std::endl;
                     carta->gasta_calor(carta->getCusto(), jogador1);//Debita o custo da carta do calor do jogador
                 }
-
+                // se a carta for um instantâneo, ela é usada imediatamente
                 else if (dynamic_cast<Instantaneo*>(carta)) {
                     int escolha;
 
@@ -280,6 +279,7 @@ int main() {
             Unidade* unidade = nullptr;
             Carta* cartainimigo = nullptr;
             Unidade* unidadeinimigo = nullptr;
+            Equipamento* equipamento = nullptr;
 
             std::cout << "|\n| - " <<"Mao Jogador: " << jogador2.getNome() << std::endl;
             jogador2.verMao();
@@ -310,7 +310,6 @@ int main() {
                     break;
                 }
                 else{
-                //jogador1.joga_carta(indice-1); //duplicado
             
                 if (dynamic_cast<Unidade*>(carta)) { //A carta é uma unidade??
                     jogador2.joga_carta(indice-1); //Joga a carta
@@ -345,16 +344,15 @@ int main() {
                     }
                 }
 
-                 else if (dynamic_cast<Equipamento*>(carta)) { //A carta é um equipamenyo??
+                 //se a carta for um equipamento, ela é equipada em uma unidade
+                else if (dynamic_cast<Equipamento*>(carta)) {
                     int escolha;
-
                     std::cout << "|\n| - " <<"Equipar\n| - Digite a qual carta deseja fornecer equipamento";
                     jogador2.verCampo();
                     std::cin>>escolha;
 
                     unidade = dynamic_cast<Unidade*>(jogador2.campo[escolha-1]);  // Tenta fazer o cast para Unidade
-                    Equipamento* equipamento = dynamic_cast<Equipamento*>(carta);
-                    
+                    equipamento = dynamic_cast<Equipamento*>(carta);
                     equipamento->fornece_efeito(*unidade, jogador2);
                     unidade->le();
                     std::cout << "|\t - Equipado com sucesso: " << carta->getNome() << std::endl;
