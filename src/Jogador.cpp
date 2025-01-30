@@ -1,5 +1,6 @@
 #include "../include/Jogador.h"
 #include <algorithm>
+#include <iomanip>
 
 Jogador::Jogador(int _vida, std::string _nome, int _qtdCalor, std::vector<Carta*> _mao, bool _vezDeJogar)
     : vida(_vida), nome(_nome), qtdCalor(_qtdCalor), mao(_mao), vezDeJogar(_vezDeJogar) {}
@@ -40,7 +41,7 @@ void Jogador::declara_efeito(Carta* c){
 void Jogador::verMao() {
     for (int i = 0; i < mao.size(); ++i) {
         Carta* carta = mao[i];
-        std::cout << "\t[" << i+1 << "] " << carta->getNome() << " " << carta->getTipo() <<  std::endl;
+        std::cout << "\t[" << i+1 << "] ";  carta->infoBasica();
     }
     std::cout << std::endl;
 }
@@ -48,8 +49,12 @@ void Jogador::verMao() {
 void Jogador::verCampo() {
     for (int i = 0; i < campo.size(); ++i) {
         Carta* carta = campo[i];
-        std::cout << "\t[" << i+1 << "] " << carta->getNome() << " " << carta->getTipo() << (carta->getEquipavel() == 0 ? " - Vazio" : " - Tripulada") <<  std::endl;
-    }
+        std::cout << "\t[" << i+1 << "] " 
+                  << std::setw(20) << std::left << carta->getNome() 
+                  << std::setw(15) << std::left << carta->getTipo() 
+                  << (carta->getEquipavel() == 0 ? " - Vazio" : " - Tripulada") 
+                  << std::endl;
+        }
     std::cout << std::endl;
 }
 
