@@ -21,7 +21,7 @@ int Baralho::quantidade_cartas() {
     return cartas.size();
 }
 
-void Baralho::imprime_cartas() {
+void Baralho::verBaralho() {
     for (Carta* carta : cartas) {
         carta->le();
         std::cout << std::endl;

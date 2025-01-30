@@ -19,7 +19,7 @@ public:
 
     Carta* seleciona_carta(int qtd);
 
-    void imprime_cartas();
+    void verBaralho();
 
     void adiciona_carta(Carta* carta);
 
