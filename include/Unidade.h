@@ -33,6 +33,7 @@ class Unidade : public Carta {
         void setAtk(int _atk);
         std::string getPiloto();
         void setPiloto(std::string nome_piloto);
+        void setEquipavel(bool equip);
     };
 
 namespace UnidadesPredefinidas {

@@ -5,7 +5,7 @@
 Instantaneo::Instantaneo(std::string _Desc, std::string _Tipo, std::string _Nome, int _Custo, int _ID): Carta(_Desc, _Tipo, _Nome, _Custo, _ID), 
 Tatica(_Desc, _Tipo, _Nome, _Custo, _ID){}
 
-void Instantaneo::fornece_efeito(Jogador jogador, Jogador inimigo){
+void Instantaneo::fornece_efeito(Jogador& jogador, Jogador& inimigo){
     switch(ID){
     case 21:
 

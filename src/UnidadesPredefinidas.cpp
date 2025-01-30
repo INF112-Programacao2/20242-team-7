@@ -9,11 +9,11 @@ namespace UnidadesPredefinidas {
      Unidade Zeong = Unidade(60,  80, 8, "Prototipo de Mobile Suit desenvolvido pelo Principado de Zeon em 0071, Seculo Universal. Originalmente planejado para ser usado por pilotos Newtype, MSN-02 Zeong possui comunicadores psiquicos para permitir manipulacao completa de seus antebracos guiados por fios para encurralar inimigos a qualquer distância.", "Heroi", "Zeong", false, 36, false);
      Unidade BigZam = Unidade(50,  70, 8, "Mobile Armor desenvolvida pelo Principado de Zeon em 0079, Seculo Universal. A carta na manga de Zeon nos estagios finais da guerra de um ano, Big Zam e a mais poderosa arma tatica usada em todo o conflito.", "Lenda", "MA-08 Big Zam", false, 37, false);
      Unidade Gelgoog = Unidade(50, 50, 6, "Linha de producao em massa desenvolvida pelo Principado de Zeon em 0079, Seculo Universal. Criado para ser igual ou superar o RX-78-2 Gundam da Federacao da Terra, MS-14A Gelgoog portava armamentos de lazer, como o rifle de assalto de raios e a Naginata de raios", "Heroi", "Gelgoog", false, 38, false);
-     Unidade ZGok = Unidade(40, 50, 4, "Linha de produção em massa desenvolvida pelo Principado de Zeon em 0079, Século Universal. O diferencial desse modelo está em sua mobilidade excepcional em terra, por mais que deixe a desejar no ar. São as Mobile Suits de preferência do time de pilotos ases de Zeon “Black Tri-Stars", "Peão", "MS-09 Dom", false, 39, false);
+     Unidade ZGok = Unidade(20,  15, 3, "Nao se sabe muito sobre ZGok...", "Undefined", "ZGok", false, 39, false);
      Unidade Gouf = Unidade(40,  40, 4, "Linha de Mobile Suits produzida pelo Principado de Zeon em 0079, Seculo Universal. Foi criado para combates terrenos de curto alcance, com mobilidade, salto e propulsores incrementados. Seu cabo de valor e um grande diferencial de demais linhas", "Peao", "MS-07B Gouf", false, 40, false);
      Unidade Zaku = Unidade(20, 20, 3, "Primeira linha de Mobile Suits produzida em Massa pelo Principado de Zeon em 0078, Seculo Universal. A maquina mais icônica de Zeon e suas ramificacões, MS-06 Zaku II forneceu uma enorme vantagem a sua faccao no comeco da guerra de um ano", "Peao", "MS-06 Zaku II", false, 41, false);
 }
 
 //Unidade(int Atk, int Hp, int Custo, std::string Desc, std::string Tipo, std::string Nome, bool Equip, int ID, bool Guarda);
 
-// arquivo de instanciacao de objetos estaticos 
+// arquivo de instanciação de objetos estáticos 
