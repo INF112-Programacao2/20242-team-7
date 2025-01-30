@@ -129,8 +129,9 @@ int main() {
                     }else{
                         unidade = dynamic_cast<Unidade*>(jogador1.campo[escolha-1]);  // Tenta fazer o cast para Unidade
                         Piloto* piloto = dynamic_cast<Piloto*>(carta);
+                        unidade->setPiloto(piloto->getNome());
+                        std::cout << "|\t - Pilotado com sucesso: " << piloto -> getNome() << std::endl;
                         unidade -> le();
-                        std::cout << "|\t - Pilotado com sucesso: " << carta->getNome() << std::endl;
                         carta->gasta_calor(carta->getCusto(), jogador1);//Debita o custo da carta do calor do jogador
                     }
                 }
@@ -144,7 +145,7 @@ int main() {
 
                     unidade = dynamic_cast<Unidade*>(jogador1.campo[escolha-1]);  // Tenta fazer o cast para Unidade
                     Equipamento* equipamento = dynamic_cast<Equipamento*>(carta);
-                    unidade -> le();
+                    
                     equipamento->fornece_efeito(*unidade, jogador1);
                     unidade->le();
                     std::cout << "|\t - Equipado com sucesso: " << carta->getNome() << std::endl;
@@ -160,7 +161,7 @@ int main() {
 
                     unidade = dynamic_cast<Unidade*>(jogador1.campo[escolha-1]);  // Tenta fazer o cast para Unidade
                     Instantaneo* instantaneo = dynamic_cast<Instantaneo*>(carta);
-                    unidade -> le();
+                    
                     instantaneo->fornece_efeito(jogador1,jogador2);
                     unidade->le();
                     std::cout << "|\t - Efeito do instantâneo fornecido: " << carta->getNome() << std::endl;
@@ -176,7 +177,7 @@ int main() {
 
                     unidade = dynamic_cast<Unidade*>(jogador1.campo[escolha-1]);  // Tenta fazer o cast para Unidade
                     Tatica* tatica = dynamic_cast<Tatica*>(carta);
-                    unidade -> le();
+                    
                     tatica->fornece_efeito(*unidade, jogador1);
                     unidade->le();
                     std::cout << "|\t - Efeito da tática fornecido: " << carta->getNome() << std::endl;
@@ -337,9 +338,10 @@ int main() {
                     }else{
                         unidade = dynamic_cast<Unidade*>(jogador2.campo[escolha-1]);  // Tenta fazer o cast para Unidade
                         Piloto* piloto = dynamic_cast<Piloto*>(carta);
-                        unidade -> le();
-                        std::cout << "|\t - Pilotado com sucesso: " << carta->getNome() << std::endl;
-                        carta->gasta_calor(carta->getCusto(), jogador1);//Debita o custo da carta do calor do jogador
+                        unidade->setPiloto(piloto->getNome());
+                        std::cout << "|\t - Pilotado com sucesso: " << piloto -> getNome() << std::endl;
+                        
+                        piloto->gasta_calor(piloto->getCusto(), jogador1);//Debita o custo da carta do calor do jogador
                     }
                 }
 
@@ -352,7 +354,7 @@ int main() {
 
                     unidade = dynamic_cast<Unidade*>(jogador2.campo[escolha-1]);  // Tenta fazer o cast para Unidade
                     Equipamento* equipamento = dynamic_cast<Equipamento*>(carta);
-                    unidade -> le();
+                    
                     equipamento->fornece_efeito(*unidade, jogador2);
                     unidade->le();
                     std::cout << "|\t - Equipado com sucesso: " << carta->getNome() << std::endl;
@@ -368,7 +370,7 @@ int main() {
 
                     unidade = dynamic_cast<Unidade*>(jogador2.campo[escolha-1]);  // Tenta fazer o cast para Unidade
                     Instantaneo* instantaneo = dynamic_cast<Instantaneo*>(carta);
-                    unidade -> le();
+                    
                     instantaneo->fornece_efeito(jogador2,jogador1);
                     unidade->le();
                     std::cout << "|\t - Efeito do instantâneo fornecido: " << carta->getNome() << std::endl;
@@ -384,7 +386,7 @@ int main() {
 
                     unidade = dynamic_cast<Unidade*>(jogador2.campo[escolha-1]);  // Tenta fazer o cast para Unidade
                     Tatica* tatica = dynamic_cast<Tatica*>(carta);
-                    unidade -> le();
+                    
                     tatica->fornece_efeito(*unidade, jogador2);
                     unidade->le();
                     std::cout << "|\t - Efeito da tática fornecido: " << carta->getNome() << std::endl;
