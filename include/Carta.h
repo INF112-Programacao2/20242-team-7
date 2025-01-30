@@ -25,6 +25,7 @@ public:
     virtual void le();
     virtual void infoBasica();
     virtual bool getEquipavel();
+    virtual void setEquipavel(bool equip);
     virtual void gasta_calor(int custo, Jogador &jogador);
     virtual void gera_calor(int qtd, Jogador &jogador);
     virtual void fornece_efeito();

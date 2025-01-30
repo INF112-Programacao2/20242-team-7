@@ -172,7 +172,7 @@ int main() {
 
                                 unidade -> le();
                                 carta->gasta_calor(carta->getCusto(), jogador1);//Debita o custo da carta do calor do jogador
-                                
+                                jogador1.atribuiCarta(indice-1);//Remove a carta da mão
                             }
                             //se a carta for um equipamento, ela é equipada em uma unidade
                             else if (dynamic_cast<Equipamento*>(carta)) {
@@ -191,6 +191,7 @@ int main() {
                                 unidade->le();
                                 std::cout << "|\t - Equipado com sucesso: " << carta->getNome() << std::endl;
                                 carta->gasta_calor(carta->getCusto(), jogador1);//Debita o custo da carta do calor do jogador
+                                jogador1.atribuiCarta(indice-1);//Remove a carta da mão
                             }
                             // se a carta for um instantâneo, ela é usada imediatamente
                             else if (dynamic_cast<Instantaneo*>(carta)) {
@@ -212,6 +213,7 @@ int main() {
                                 unidade->le();
                                 std::cout << "|\t - Efeito do instantâneo fornecido: " << carta->getNome() << std::endl;
                                 carta->gasta_calor(carta->getCusto(), jogador1);//Debita o custo da carta do calor do jogador
+                                jogador1.atribuiCarta(indice-1);//Remove a carta da mão
                             }
                         }
                     }
@@ -406,6 +408,7 @@ int main() {
 
                                 unidade -> le();
                                 carta->gasta_calor(carta->getCusto(), jogador2);//Debita o custo da carta do calor do jogador
+                                jogador2.atribuiCarta(indice-1);//Remove a carta da mão
                                 
                             }
 
@@ -427,6 +430,7 @@ int main() {
                                 unidade->le();
                                 std::cout << "|\t - Equipado com sucesso: " << carta->getNome() << std::endl;
                                 carta->gasta_calor(carta->getCusto(), jogador2);//Debita o custo da carta do calor do jogador
+                                jogador2.atribuiCarta(indice-1);//Remove a carta da mão
                             }
 
                             else if (dynamic_cast<Instantaneo*>(carta)) { //A carta é um efeito insantaneo??
@@ -448,6 +452,7 @@ int main() {
                                 unidade->le();
                                 std::cout << "|\t - Efeito do instantâneo fornecido: " << carta->getNome() << std::endl;
                                 carta->gasta_calor(carta->getCusto(), jogador2);//Debita o custo da carta do calor do jogador
+                                jogador2.atribuiCarta(indice-1);//Remove a carta da mão
                             }
                         }
                     }

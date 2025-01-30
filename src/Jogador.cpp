@@ -19,6 +19,12 @@ void Jogador::joga_carta(int indice) {
     }
 }
 
+void Jogador::atribuiCarta(int indice) {
+    if (indice >= 0 && indice < mao.size()) {
+        mao.erase(mao.begin() + indice);
+    }
+}
+
 void Jogador::descarta(const Carta* carta) {
     // seleciona uma carta da mão e descarta
     auto it = std::find_if(mao.begin(), mao.end(), [&](const Carta* c) { return *c == *carta; });
@@ -52,7 +58,7 @@ void Jogador::verCampo() {
         std::cout << "\t[" << i+1 << "] " 
                   << std::setw(20) << std::left << carta->getNome() 
                   << std::setw(15) << std::left << carta->getTipo() 
-                  << (carta->getEquipavel() == 0 ? " - Vazio" : " - Tripulada") 
+                  << (carta->getEquipavel() ? " - Tripulada" : " - Vazio") 
                   << std::endl;
         }
     std::cout << std::endl;

@@ -36,6 +36,10 @@ void Carta::infoBasica(){
               << "\t* Custo: " << Custo << std::endl;
 }
 
+void Carta::setEquipavel(bool equip){
+    equipavel = equip; //Seta o valor de equipavel
+}
+
 bool Carta::getEquipavel(){
     return equipavel; 
 }

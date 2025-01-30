@@ -68,7 +68,7 @@ void Unidade::ativaEvasao(){
 }
 
 void Unidade::setPiloto(std::string _piloto){
-    Equip = true;
+    setEquipavel(true);
     pilotoAssociado = _piloto;
 }
 
@@ -76,7 +76,4 @@ std::string Unidade::getPiloto(){
     return pilotoAssociado;
 }
 
-void Unidade::setEquipavel(bool equipavel){
-    Equip = equipavel;
-}
 

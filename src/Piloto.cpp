@@ -118,7 +118,7 @@ void Piloto::fornece_efeito(Jogador& jog) {
         case 6:// Dozle Zabi
             std::cout << "|\t - Se a sua unidade tripulada for do tipo heroi, voce pode gastar 2 de calor, e receber +15 pontos de ATK" <<std::endl;
             if(unidade_tripulada.getTipo()=="Heroi"){
-                std::cout << "|\t - Selecione uma opcao;\n 0-Nao\n\t - 1-Sim\n";
+                std::cout << "|\t - Selecione uma opcao;\n 0-Nao\n|\t - 1-Sim\n";
                 std::cin>>decide;
                 if(decide==1 &&jog.getcalor()>=1){
                      jog.setcalor(jog.getcalor()-1); //Gasta  calor
@@ -132,7 +132,7 @@ void Piloto::fornece_efeito(Jogador& jog) {
 
         case 7: //Ramba Ral
             std::cout << "|\t - Deseja gastar 2 de calor, para receber evasao?"<<std::endl;
-            std::cout << "|\t - 0-Nao\n\t - 1-Sim\n"<<std::endl;
+            std::cout << "|\t - 0-Nao\n|\t - 1-Sim\n"<<std::endl;
             std::cin>>decide;
             if(decide==1 && jog.getcalor()>=2){
                 jog.setcalor(jog.getcalor()-2);
